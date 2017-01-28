@@ -18,12 +18,23 @@ const mapStoreToProps = ({ auth }, { router }) => {
   };
 };
 
+@connect(mapStoreToProps, mapDispatchToProps)
 class Signin extends React.Component {
+
+  static propTypes = {
+    signin: React.PropTypes.func,
+    authErrors: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.object,
+    ]),
+  }
+
+
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: 'mail@example.com',
+      password: '12345',
     };
   }
 
@@ -62,8 +73,8 @@ class Signin extends React.Component {
         <h2 className='signin__header'>{'Sign in'}</h2>
         <div className='signing__form'>
           { this.renderErrors() }
-          <InputField inputType='text' title='Email' onChange={ (event) => { this.onEmailChanged(event); } } />
-          <InputField inputType='password' title='Password' onChange={ (event) => { this.onPasswordChanged(event); } } />
+          <InputField inputType='text' title='Email' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } />
+          <InputField inputType='password' title='Password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } />
           <button onClick={ () => { this.onSignin(); } }>{ 'Sign in' }</button>
         </div>
       </section>
@@ -71,12 +82,4 @@ class Signin extends React.Component {
   }
 }
 
-Signin.propTypes = {
-  signin: React.PropTypes.func,
-  authErrors: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-  ]),
-};
-
-export default connect(mapStoreToProps, mapDispatchToProps)(Signin);
+export default Signin;

@@ -1,4 +1,5 @@
-import api from 'api';
+import { authorize } from '../api';
+import { loadApps } from './apps';
 
 export const signedIn = (token) => ({ type: 'SIGNED_IN', data: token });
 export const errorSigningIn = (errors) => ({ type: 'ERROR_SIGINIG_IN', data: errors });
@@ -7,7 +8,7 @@ export const saveCurrentPath = (path) => ({ type: 'SAVE_CURRENT_PATH', data: pat
 export const signin = (email, password) => {
   let responseCode;
   return dispatch => {
-    api.authorize(email, password)
+    authorize(email, password)
     .then(response => {
       responseCode = response.status;
       return response.json();
@@ -19,14 +20,13 @@ export const signin = (email, password) => {
           break;
         case 200:
           dispatch(signedIn(payload.token));
+          dispatch(loadApps());
           break;
         default:
           dispatch(errorSigningIn('Unknown error'));
       }
     })
-    .catch(result => {
-      return result;
-      // console.log('Fail ', result);
+    .catch(() => {
     });
   };
 };
