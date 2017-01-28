@@ -5,19 +5,20 @@ export const errorSigningIn = (errors) => ({ type: 'ERROR_SIGINIG_IN', data: err
 export const saveCurrentPath = (path) => ({ type: 'SAVE_CURRENT_PATH', data: path })
 
 export const signin = (email, password) => {
+  let responseCode;
   return dispatch => {
     api.authorize(email, password)
     .then(response => {
-      console.log(response)
-      const json = JSON.parse(response.body) //result.json()
-      switch (response.status) {
+      responseCode = response.status;
+      return response.json()
+    })
+    .then(payload => {
+      switch (responseCode) {
         case 401:
-          console.log(json)
-          console.log(json.errors)
-          dispatch(errorSigningIn(json.errors))
+          dispatch(errorSigningIn(payload.errors));
           break
         case 200:
-          dispatch(signedIn(json.token))
+          dispatch(signedIn(payload.token));
           break
         default:
           dispatch(errorSigningIn("Unknown error"))

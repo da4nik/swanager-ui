@@ -6,11 +6,17 @@ import { signin } from '../../actions/signin'
 
 const mapDispatchToProps = dispatch => ({
   signin: (email, password) => dispatch(signin(email, password))
-})
-
-const mapStateToProps = ({ auth }) => ({
-  authErrors: auth.errors
 });
+
+const mapStoreToProps = ({ auth }, { router }) => {
+  const authToken = auth.get('authToken')
+  return {
+    authErrors: auth.get('errors'),
+    isLoggedIn: (authToken != null && authToken.length > 0),
+    redirectPath: auth.get('redirectPath'),
+    router
+  }
+};
 
 class Signin extends React.Component {
   constructor() {
@@ -18,6 +24,14 @@ class Signin extends React.Component {
     this.state = {
       email: '',
       password: ''
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    const { isLoggedIn, redirectPath, router } = nextProps;
+    // If already logged in, redirect to back or to root
+    if (isLoggedIn) {
+      router.replace((redirectPath && redirectPath.length > 0) ? redirectPath : '/' )
     }
   }
 
@@ -37,11 +51,7 @@ class Signin extends React.Component {
   renderErrors() {
     const { authErrors } = this.props
     if (authErrors) {
-      return (
-        <p>
-          { authErrors }
-        </p>
-      )
+      return (<p>{ authErrors }</p>)
     }
     return null;
   }
@@ -53,9 +63,7 @@ class Signin extends React.Component {
         <div className='signing__form'>
           { this.renderErrors() }
           <InputField inputType="text" title="Email" onChange={ this.onEmailChanged.bind(this) } />
-          <br />
           <InputField inputType="password" title="Password" onChange={ this.onPasswordChanged.bind(this) }/>
-          <br />
           <button onClick={ () => { this.onSignin() } }>{'Sign in'}</button>
         </div>
       </section>
@@ -63,4 +71,4 @@ class Signin extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin)
+export default connect(mapStoreToProps, mapDispatchToProps)(Signin)
