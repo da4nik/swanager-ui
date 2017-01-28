@@ -2,20 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import InputField from '../../components/Inputs/InputField';
-import { signin } from '../../actions/signin'
+import { signin } from '../../actions/signin';
 
 const mapDispatchToProps = dispatch => ({
-  signin: (email, password) => dispatch(signin(email, password))
+  signin: (email, password) => dispatch(signin(email, password)),
 });
 
 const mapStoreToProps = ({ auth }, { router }) => {
-  const authToken = auth.get('authToken')
+  const authToken = auth.get('authToken');
   return {
     authErrors: auth.get('errors'),
     isLoggedIn: (authToken != null && authToken.length > 0),
     redirectPath: auth.get('redirectPath'),
-    router
-  }
+    router,
+  };
 };
 
 class Signin extends React.Component {
@@ -23,35 +23,35 @@ class Signin extends React.Component {
     super();
     this.state = {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   }
 
   componentWillUpdate(nextProps) {
     const { isLoggedIn, redirectPath, router } = nextProps;
     // If already logged in, redirect to back or to root
     if (isLoggedIn) {
-      router.replace((redirectPath && redirectPath.length > 0) ? redirectPath : '/' )
+      router.replace((redirectPath && redirectPath.length > 0) ? redirectPath : '/');
     }
   }
 
   onSignin() {
-    let { email, password } = this.state;
-    this.props.signin(email, password)
+    const { email, password } = this.state;
+    this.props.signin(email, password);
   }
 
   onPasswordChanged(event) {
-    this.setState({ password: event.target.value })
+    this.setState({ password: event.target.value });
   }
 
   onEmailChanged(event) {
-    this.setState({ email: event.target.value })
+    this.setState({ email: event.target.value });
   }
 
   renderErrors() {
-    const { authErrors } = this.props
+    const { authErrors } = this.props;
     if (authErrors) {
-      return (<p>{ authErrors }</p>)
+      return (<p>{ authErrors }</p>);
     }
     return null;
   }
@@ -62,13 +62,21 @@ class Signin extends React.Component {
         <h2 className='signin__header'>{'Sign in'}</h2>
         <div className='signing__form'>
           { this.renderErrors() }
-          <InputField inputType="text" title="Email" onChange={ this.onEmailChanged.bind(this) } />
-          <InputField inputType="password" title="Password" onChange={ this.onPasswordChanged.bind(this) }/>
-          <button onClick={ () => { this.onSignin() } }>{'Sign in'}</button>
+          <InputField inputType='text' title='Email' onChange={ (event) => { this.onEmailChanged(event); } } />
+          <InputField inputType='password' title='Password' onChange={ (event) => { this.onPasswordChanged(event); } } />
+          <button onClick={ () => { this.onSignin(); } }>{ 'Sign in' }</button>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default connect(mapStoreToProps, mapDispatchToProps)(Signin)
+Signin.propTypes = {
+  signin: React.PropTypes.func,
+  authErrors: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object,
+  ]),
+};
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Signin);
