@@ -12,6 +12,7 @@ const initialState = Map({
   asyncLoading: false,
   asyncError: null,
   asyncData: null,
+  authToken: "sometoken"
 });
 
 const actionsMap = {
