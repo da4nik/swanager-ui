@@ -43,3 +43,10 @@ export const applications = () => {
     headers: headers(),
   });
 };
+
+export const services = () => {
+  return fetch(`${ apiURL }/services`, {
+    method: 'GET',
+    headers: headers(),
+  });
+};
