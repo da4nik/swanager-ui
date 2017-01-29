@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+
 import { loadApps } from '../../actions/apps';
 import { loadServices } from '../../actions/services';
+import Applications from './Applications';
 
 
 const mapStoreToProps = ({ apps }) => ({ apps });
@@ -34,7 +36,7 @@ export default class Dashboard extends Component {
     return (
       <div className='dashboard'>
         <h1>{'Dashboard'}</h1>
-        { this.renderApps() }
+        <Applications apps={ this.props.apps } />
       </div>
     );
   }
