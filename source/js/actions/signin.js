@@ -5,6 +5,12 @@ export const signedIn = (token) => ({ type: 'SIGNED_IN', data: token });
 export const errorSigningIn = (errors) => ({ type: 'ERROR_SIGINIG_IN', data: errors });
 export const saveCurrentPath = (path) => ({ type: 'SAVE_CURRENT_PATH', data: path });
 
+export const saveTokenToLocalstore = (token) => {
+  return () => {
+    localStorage.setItem('authToken', token.token);
+  };
+};
+
 export const signin = (email, password) => {
   let responseCode;
   return dispatch => {
@@ -20,6 +26,7 @@ export const signin = (email, password) => {
           break;
         case 200:
           dispatch(signedIn(payload.token));
+          dispatch(saveTokenToLocalstore(payload.token));
           dispatch(loadApps());
           break;
         default:

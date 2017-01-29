@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 
 const initialState = Map({
-  authToken: '',
+  authToken: localStorage.getItem('authToken') || '',
 });
 
 export default function reducer(state = initialState, action = {}) {
