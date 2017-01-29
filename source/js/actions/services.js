@@ -1,7 +1,8 @@
 import { services } from '../api';
+import { SERVICES_LOADED } from './index';
 
 export const servicesLoaded = (loadedServices) => ({
-  type: 'SERVICES_LOADED',
+  type: SERVICES_LOADED,
   data: loadedServices,
 });
 

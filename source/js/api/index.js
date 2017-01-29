@@ -44,6 +44,23 @@ export const applications = () => {
   });
 };
 
+export const saveApplication = (app) => {
+  // Create if id not exists or empty
+  let method = 'POST';
+  let url = `${ apiURL }/apps`;
+
+  if (app.id && app.length > 0) {
+    method = 'PUT';
+    url = `${ apiURL }/apps/${ app.id }`;
+  }
+
+  return fetch(url, {
+    method,
+    headers: headers(),
+    body: JSON.stringify(app),
+  });
+};
+
 export const services = () => {
   return fetch(`${ apiURL }/services`, {
     method: 'GET',

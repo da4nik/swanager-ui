@@ -1,9 +1,10 @@
 import { authorize } from '../api';
 import { loadApps } from './apps';
+import { SIGNED_IN, ERROR_SIGINIG_IN, SAVE_CURRENT_PATH } from './index';
 
-export const signedIn = (token) => ({ type: 'SIGNED_IN', data: token });
-export const errorSigningIn = (errors) => ({ type: 'ERROR_SIGINIG_IN', data: errors });
-export const saveCurrentPath = (path) => ({ type: 'SAVE_CURRENT_PATH', data: path });
+export const signedIn = (token) => ({ type: SIGNED_IN, data: token });
+export const errorSigningIn = (errors) => ({ type: ERROR_SIGINIG_IN, data: errors });
+export const saveCurrentPath = (path) => ({ type: SAVE_CURRENT_PATH, data: path });
 
 export const saveTokenToLocalstore = (token) => {
   return () => {

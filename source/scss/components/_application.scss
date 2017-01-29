@@ -1,0 +1,19 @@
+.application {
+
+  &__title {
+    font-size: x-large;
+  }
+
+  &__button {
+    background-color: red;
+    margin-left: 5px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &_left-spaced {
+      margin-left: 15px;
+    }
+  }
+}

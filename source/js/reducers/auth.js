@@ -1,4 +1,5 @@
 import { Map } from 'immutable';
+import { SIGNED_IN, ERROR_SIGINIG_IN, SAVE_CURRENT_PATH } from '../actions';
 
 const initialState = Map({
   authToken: localStorage.getItem('authToken') || '',
@@ -6,11 +7,11 @@ const initialState = Map({
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case 'SIGNED_IN':
+    case SIGNED_IN:
       return state.set('authToken', action.data.token);
-    case 'ERROR_SIGINIG_IN':
+    case ERROR_SIGINIG_IN:
       return state.set('authToken', '').set('errors', action.data);
-    case 'SAVE_CURRENT_PATH':
+    case SAVE_CURRENT_PATH:
       return state.set('redirectPath', action.data);
     default:
       return state;
