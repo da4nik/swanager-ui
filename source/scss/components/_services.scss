@@ -1,38 +1,25 @@
 $header-height: 20px;
 $header-margin: 20px;
 
-.application {
+.services {
   position: relative;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  border: 1px solid #aaa;
   padding: ($header-height + $header-margin) 10px 10px 10px;
-  margin: 10px 0;
-  max-width: 500px;
 
   &__title {
-    color: #777;
-    font-size: x-large;
+    color: #888;
+    font-size: large;
     position: absolute;
     top: 5px; left: 5px;
     line-height: $header-height;
   }
 
-  &__buttons-container {
+  &__no-services {
+    color: #AAA;
+  }
+
+  &__buttons {
     position: absolute;
     top: 5px; right: 5px;
-  }
-
-
-  &__form {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 5px;
-  }
-
-  &__services {
-
   }
 
 
@@ -56,10 +43,6 @@ $header-margin: 20px;
 
     &:last-of-type {
       margin-right: 0;
-    }
-
-    &_left-spaced {
-      margin-left: 15px;
     }
   }
 }

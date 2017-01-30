@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 
-import Service from './Service';
+import Services from './Services';
 import ApplicationForm from './ApplicationForm';
 
 const mapStoreToProps = ({ services }) => ({ services });
@@ -26,22 +26,19 @@ class Application extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
 
-  renderServices() {
-    const { services } = this.props;
-    return services.valueSeq().map((service) => {
-      return (<Service key={ service.id } service={ service } />);
-    });
-  }
-
   renderEditForm() {
     if (this.state.editing) {
-      return (<ApplicationForm app={ this.props.app } />);
+      return (
+        <div className='application__form'>
+          <ApplicationForm app={ this.props.app } />
+        </div>
+      );
     }
     return null;
   }
 
   render() {
-    const { app } = this.props;
+    const { app, services } = this.props;
     return (
       <section className='application'>
         <div className='application__title'>{ app.name }</div>
@@ -52,9 +49,12 @@ class Application extends React.Component {
             className='application__button application__button_left-spaced'
             onClick={ () => { this.onEditClicked(); } }
           >Edit</button>
+          <button className='application__button'>Remove</button>
         </div>
-        <div>{ this.renderEditForm() }</div>
-        <p>{ this.renderServices() }</p>
+        { this.renderEditForm() }
+        <div className='application__services'>
+          <Services services={ services } app={ app } />
+        </div>
       </section>
     );
   }

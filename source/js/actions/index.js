@@ -4,6 +4,7 @@ export const APP_LOADED = 'APP_LOADED';
 
 // Services
 export const SERVICES_LOADED = 'SERVICES_LOADED';
+export const SERVICE_LOADED = 'SERVICE_LOADED';
 
 // Signin
 export const SIGNED_IN = 'SIGNED_IN';

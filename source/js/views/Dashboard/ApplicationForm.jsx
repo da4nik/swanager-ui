@@ -36,13 +36,17 @@ class ApplicationForm extends React.Component {
     const { name } = this.state;
     return (
       <section className='app-form'>
-        <h1>Form</h1>
-        <label htmlFor='name'>
+        <div className='app-form__title'>Form</div>
+        <label htmlFor='name' className='app-form__input'>
           {' Application name: '}
-          <input type='text' value={ name } onChange={ (event) => { this.onNameChange(event); } } />
+          <input
+            type='text'
+            value={ name }
+            onChange={ (event) => { this.onNameChange(event); } }
+          />
         </label>
 
-        <button className='app-form_submit' onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='app-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
       </section>
     );
   }

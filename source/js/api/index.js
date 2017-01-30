@@ -49,7 +49,7 @@ export const saveApplication = (app) => {
   let method = 'POST';
   let url = `${ apiURL }/apps`;
 
-  if (app.id && app.length > 0) {
+  if (app.id && app.id.length > 0) {
     method = 'PUT';
     url = `${ apiURL }/apps/${ app.id }`;
   }
@@ -65,5 +65,22 @@ export const services = () => {
   return fetch(`${ apiURL }/services`, {
     method: 'GET',
     headers: headers(),
+  });
+};
+
+export const saveService = (service) => {
+  // Create if id not exists or empty
+  let method = 'POST';
+  let url = `${ apiURL }/services`;
+
+  if (service.id && service.id.length > 0) {
+    method = 'PUT';
+    url = `${ apiURL }/services/${ service.id }`;
+  }
+
+  return fetch(url, {
+    method,
+    headers: headers(),
+    body: JSON.stringify(service),
   });
 };
