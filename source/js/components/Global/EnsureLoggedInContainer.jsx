@@ -16,9 +16,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class EnsureLoggedInContainer extends React.Component {
-  componentDidMount() {
-    const { router, saveRedirectBackPath } = this.props;
-    if (!this.props.isLoggedIn) {
+  componentWillReceiveProps(nextProps) {
+    const { router, saveRedirectBackPath, isLoggedIn } = nextProps;
+    if (!isLoggedIn) {
       saveRedirectBackPath(router.location.pathname);
       router.replace('/signin');
     }

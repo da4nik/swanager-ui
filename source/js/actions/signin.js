@@ -1,6 +1,5 @@
 import { authorize } from '../api';
-import { loadApps } from './apps';
-import { SIGNED_IN, ERROR_SIGINIG_IN, SAVE_CURRENT_PATH } from './index';
+import { SIGNED_IN, ERROR_SIGINIG_IN, SAVE_CURRENT_PATH, UNAUTHORIZED } from './index';
 
 export const signedIn = (token) => ({ type: SIGNED_IN, data: token });
 export const errorSigningIn = (errors) => ({ type: ERROR_SIGINIG_IN, data: errors });
@@ -28,7 +27,6 @@ export const signin = (email, password) => {
         case 200:
           dispatch(signedIn(payload.token));
           dispatch(saveTokenToLocalstore(payload.token));
-          dispatch(loadApps());
           break;
         default:
           dispatch(errorSigningIn('Unknown error'));
@@ -37,4 +35,9 @@ export const signin = (email, password) => {
     .catch(() => {
     });
   };
+};
+
+export const signout = () => {
+  localStorage.setItem('authToken', null);
+  return { type: UNAUTHORIZED, data: null };
 };
