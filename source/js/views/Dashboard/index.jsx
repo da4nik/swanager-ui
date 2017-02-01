@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { loadApps } from '../../actions/apps';
+import { loadApplications } from '../../actions/apps';
 import Applications from './Applications';
 
 
 const mapStoreToProps = ({ apps }) => ({ apps });
 const mapDispatchToProps = dispatch => ({
-  loadApplications: () => { dispatch(loadApps()); },
+  loadApplications: () => { dispatch(loadApplications()); },
 });
 
 @connect(mapStoreToProps, mapDispatchToProps)

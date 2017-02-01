@@ -1,6 +1,7 @@
 // Applications
 export const APPS_LOADED = 'APPS_LOADED';
 export const APP_LOADED = 'APP_LOADED';
+export const APP_DELETED = 'APP_DELETED';
 
 // Services
 export const SERVICES_LOADED = 'SERVICES_LOADED';

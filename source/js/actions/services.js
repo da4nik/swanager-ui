@@ -1,4 +1,4 @@
-import { services, saveService } from '../api';
+import API from '../api';
 import { SERVICES_LOADED, SERVICE_LOADED } from './index';
 import { signout } from './signin';
 
@@ -11,7 +11,7 @@ export const servicesLoaded = (loadedServices) => ({
 export const loadServices = () => {
   let responseStatus;
   return dispatch => {
-    services()
+    API.services()
       .then(response => {
         responseStatus = response.status;
         return response.json();
@@ -29,16 +29,15 @@ export const loadServices = () => {
         }
       })
       .catch(response => {
-        console.log('Something went wrong.');
-        console.log(response);
+        console.log('[loadServices] Something went wrong. ', response);
       });
   };
 };
 
-export const saveServ = (service) => {
+export const saveService = (service) => {
   let responseStatus;
   return dispatch => {
-    saveService(service)
+    API.saveService(service)
     .then(response => {
       responseStatus = response.status;
       return response.json();
@@ -57,8 +56,7 @@ export const saveServ = (service) => {
       }
     })
     .catch(response => {
-      console.log('Something went wrong.');
-      console.log(response);
+      console.log('[saveServ] Something went wrong. ', response);
     });
   };
 };

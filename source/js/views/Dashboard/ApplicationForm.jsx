@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { saveApp } from '../../actions/apps';
+import { saveApplication } from '../../actions/apps';
 
 const mapDispatchToProps = dispatch => ({
-  saveApplication: (application) => { dispatch(saveApp(application)); },
+  saveApplication: (application) => { dispatch(saveApplication(application)); },
 });
 
 @connect(null, mapDispatchToProps)

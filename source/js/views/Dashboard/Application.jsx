@@ -4,14 +4,23 @@ import { connect } from 'react-redux';
 
 import Services from './Services';
 import ApplicationForm from './ApplicationForm';
+import { applyAppAction, destroyApplication } from '../../actions/apps';
+import API from '../../api';
 
 const mapStoreToProps = ({ services }) => ({ services });
 
-@connect(mapStoreToProps)
+const mapDispatchToProps = dispatch => ({
+  applyAction: (app, action) => { dispatch(applyAppAction(app, action)); },
+  destroyApp: (app) => { dispatch(destroyApplication(app)); },
+});
+
+@connect(mapStoreToProps, mapDispatchToProps)
 class Application extends React.Component {
   static propTypes = {
     app: PropTypes.object,
     services: PropTypes.instanceOf(Immutable.Map),
+    destroyApp: PropTypes.func,
+    applyAction: PropTypes.func,
   }
 
   constructor() {
@@ -38,18 +47,27 @@ class Application extends React.Component {
   }
 
   render() {
-    const { app, services } = this.props;
+    const { app, services, applyAction, destroyApp } = this.props;
     return (
       <section className='application'>
         <div className='application__title'>{ app.name }</div>
         <div className='application__buttons-container'>
-          <button className='application__button'>Start</button>
-          <button className='application__button'>Stop</button>
+          <button
+            className='application__button'
+            onClick={ () => { applyAction(app, API.appActions.START); } }
+          >Start</button>
+          <button
+            className='application__button'
+            onClick={ () => { applyAction(app, API.appActions.STOP); } }
+          >Stop</button>
           <button
             className='application__button application__button_left-spaced'
             onClick={ () => { this.onEditClicked(); } }
           >Edit</button>
-          <button className='application__button'>Remove</button>
+          <button
+            className='application__button'
+            onClick={ () => { destroyApp(app); } }
+          >Remove</button>
         </div>
         { this.renderEditForm() }
         <div className='application__services'>

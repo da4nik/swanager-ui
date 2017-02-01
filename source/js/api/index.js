@@ -29,7 +29,9 @@ const headers = (additionalHeaders = {}) => {
   );
 };
 
-export const authorize = (email, password) => {
+// ################# AUTH
+
+const authorize = (email, password) => {
   return fetch(`${ apiURL }/session`, {
     method: 'POST',
     body: JSON.stringify({ email, password }),
@@ -37,14 +39,22 @@ export const authorize = (email, password) => {
   });
 };
 
-export const applications = () => {
+// ################# APPLICATION
+
+const appActions = {
+  START: 'start',
+  STOP: 'stop',
+};
+
+
+const applications = () => {
   return fetch(`${ apiURL }/apps`, {
     method: 'GET',
     headers: headers(),
   });
 };
 
-export const saveApplication = (app) => {
+const saveApplication = (app) => {
   // Create if id not exists or empty
   let method = 'POST';
   let url = `${ apiURL }/apps`;
@@ -61,14 +71,31 @@ export const saveApplication = (app) => {
   });
 };
 
-export const services = () => {
+const destroyApplication = (app) => {
+  return fetch(`${ apiURL }/apps/${ app.id }`, {
+    method: 'DELETE',
+    headers: headers(),
+  });
+};
+
+const applicationAction = (app, action) => {
+  const url = `${ apiURL }/apps/${ app.id }/${ action }`;
+  return fetch(url, {
+    method: 'PUT',
+    headers: headers(),
+  });
+};
+
+// ################# SERVICE
+
+const services = () => {
   return fetch(`${ apiURL }/services`, {
     method: 'GET',
     headers: headers(),
   });
 };
 
-export const saveService = (service) => {
+const saveService = (service) => {
   // Create if id not exists or empty
   let method = 'POST';
   let url = `${ apiURL }/services`;
@@ -83,4 +110,15 @@ export const saveService = (service) => {
     headers: headers(),
     body: JSON.stringify(service),
   });
+};
+
+export default {
+  authorize,
+  services,
+  saveService,
+  applicationAction,
+  destroyApplication,
+  saveApplication,
+  applications,
+  appActions,
 };

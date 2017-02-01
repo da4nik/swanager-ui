@@ -1,4 +1,4 @@
-import { authorize } from '../api';
+import API from '../api';
 import { SIGNED_IN, ERROR_SIGINIG_IN, SAVE_CURRENT_PATH, UNAUTHORIZED } from './index';
 
 export const signedIn = (token) => ({ type: SIGNED_IN, data: token });
@@ -14,7 +14,7 @@ export const saveTokenToLocalstore = (token) => {
 export const signin = (email, password) => {
   let responseCode;
   return dispatch => {
-    authorize(email, password)
+    API.authorize(email, password)
     .then(response => {
       responseCode = response.status;
       return response.json();
