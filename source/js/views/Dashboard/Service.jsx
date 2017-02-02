@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import ServiceForm from './ServiceForm';
+import ServiceStatus from './ServiceStatus';
 
 class Service extends React.Component {
   static propTypes = {
@@ -31,6 +32,15 @@ class Service extends React.Component {
     return null;
   }
 
+  renderStatus() {
+    const { service } = this.props;
+    return service.status ?
+      service.status.map((status) => {
+        return (<ServiceStatus key={ status.replica_id } status={ status } />);
+      }) :
+      null;
+  }
+
   render() {
     const { service } = this.props;
     return (
@@ -42,6 +52,9 @@ class Service extends React.Component {
             <li>NS Name: { service.ns_name }</li>
             <li>Replicas: { service.replicas }</li>
           </ul>
+        </div>
+        <div className='service_status'>
+          { this.renderStatus() }
         </div>
         <button
           className='service__edit-button'
