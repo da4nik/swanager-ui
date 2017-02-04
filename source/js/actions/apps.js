@@ -2,6 +2,7 @@ import API from '../api';
 import { APPS_LOADED, APP_LOADED, APP_DELETED } from './index';
 import { signout } from './signin';
 import { loadServices } from './services';
+import { addAutohidedNotification } from './notifications';
 
 export const appsLoaded = (apps) => ({ type: APPS_LOADED, data: apps });
 export const appLoaded = (app) => ({ type: APP_LOADED, data: app });
@@ -19,6 +20,7 @@ export const loadApplications = () => {
       switch (responseStatus) {
         case 200:
           dispatch(appsLoaded(responseBody.applications));
+          dispatch(addAutohidedNotification('API', 'Applications loaded'));
           dispatch(loadServices());
           break;
         case 401:

@@ -1,0 +1,35 @@
+.notifications {
+  position: fixed;
+  bottom: 5px; left: 10px;
+  width: 300px;
+  height: auto;
+  background-color: transparent;
+  transition: 5s ease-in;
+
+  &__notification {
+    position: relative;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 5px;
+  }
+
+  &__notification-title {
+    color: #EEE;
+    text-decoration: underline;
+    font-size: larger;
+  }
+
+  &__notification-text {
+    color: #DDD;
+  }
+
+  &__notification-close {
+    position: absolute;
+    top: 5px; right: 5px;
+
+    padding: 5px;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+}

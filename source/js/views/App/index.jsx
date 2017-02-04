@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import Notifications from '../../components/Global/Notifications';
+
 
 export default class App extends Component {
   static propTypes = {
@@ -14,6 +16,7 @@ export default class App extends Component {
         <div className='Page'>
           { children }
         </div>
+        <Notifications />
       </div>
     );
   }

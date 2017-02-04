@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import apps from 'reducers/apps';
-import auth from 'reducers/auth';
-import services from 'reducers/services';
+import apps from './apps';
+import auth from './auth';
+import services from './services';
+import notifications from './notifications';
 
 
 export default combineReducers({
-  auth, apps, services,
+  auth, apps, services, notifications,
 });

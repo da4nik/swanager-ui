@@ -1,6 +1,7 @@
 import API from '../api';
 import { SERVICES_LOADED, SERVICE_LOADED } from './index';
 import { signout } from './signin';
+import { addAutohidedNotification } from './notifications';
 
 export const serviceLoaded = (loadedService) => ({ type: SERVICE_LOADED, data: loadedService });
 export const servicesLoaded = (loadedServices) => ({
@@ -20,6 +21,7 @@ export const loadServices = () => {
         switch (responseStatus) {
           case 200:
             dispatch(servicesLoaded(payload.services));
+            dispatch(addAutohidedNotification('API', 'Services loaded'));
             break;
           case 401:
             dispatch(signout());

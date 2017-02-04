@@ -23,6 +23,7 @@ class Applications extends React.Component {
 
   renderApps() {
     const { apps } = this.props;
+
     return apps.valueSeq().map((app) => {
       return <Application key={ app.id } app={ app } />;
     });
