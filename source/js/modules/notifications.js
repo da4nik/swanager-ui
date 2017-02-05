@@ -1,12 +1,12 @@
 import { store } from '../index';
-import { addNotification, hideNotification } from '../actions/notifications';
+import { addNotification, addAutohidedNotification } from '../actions/notifications';
 
-const add = (notification) => {
-  store.dispatch(addNotification(notification));
+const add = (title, text) => {
+  store.dispatch(addNotification(title, text));
 };
 
-const hide = (notification) => {
-  store.dispatch(hideNotification(notification));
+const addAutoHide = (title, text, duration) => {
+  store.dispatch(addAutohidedNotification(title, text, duration));
 };
 
-export default { add, hide };
+export default { add, addAutoHide };

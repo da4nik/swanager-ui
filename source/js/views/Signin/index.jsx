@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import InputField from '../../components/Inputs/InputField';
@@ -22,13 +22,15 @@ const mapStoreToProps = ({ auth }, { router }) => {
 class Signin extends React.Component {
 
   static propTypes = {
-    signin: React.PropTypes.func,
-    authErrors: React.PropTypes.oneOfType([
+    signin: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
+    redirectPath: PropTypes.string,
+    router: PropTypes.object,
+    authErrors: PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object,
     ]),
   }
-
 
   constructor() {
     super();
@@ -38,12 +40,12 @@ class Signin extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.redirectAuthenticated();
+  }
+
   componentWillUpdate(nextProps) {
-    const { isLoggedIn, redirectPath, router } = nextProps;
-    // If already logged in, redirect to back or to root
-    if (isLoggedIn) {
-      router.replace((redirectPath && redirectPath.length > 0) ? redirectPath : '/');
-    }
+    this.redirectAuthenticated(nextProps);
   }
 
   onSignin() {
@@ -57,6 +59,14 @@ class Signin extends React.Component {
 
   onEmailChanged(event) {
     this.setState({ email: event.target.value });
+  }
+
+  redirectAuthenticated(nextProps = this.props) {
+    const { isLoggedIn, redirectPath, router } = nextProps;
+    // If already logged in, redirect to back or to root
+    if (isLoggedIn) {
+      router.replace((redirectPath && redirectPath.length > 0) ? redirectPath : '/');
+    }
   }
 
   renderErrors() {

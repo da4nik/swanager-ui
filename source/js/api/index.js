@@ -1,6 +1,8 @@
 import { store } from '../index';
 
-const apiURL = 'http://localhost:4945/api/v1';
+const baseHost = 'localhost:4945';
+const apiURL = `http://${ baseHost }/api/v1`;
+const wsURL = `ws://${ baseHost }/ws`;
 
 const getToken = () => {
   const state = store.getState();
@@ -113,6 +115,8 @@ const saveService = (service) => {
 };
 
 export default {
+  apiURL,
+  wsURL,
   authorize,
   services,
   saveService,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { saveCurrentPath } from '../../actions/signin';
@@ -15,9 +15,25 @@ const mapDispatchToProps = dispatch => ({
   saveRedirectBackPath: (path) => { dispatch(saveCurrentPath(path)); },
 });
 
+@connect(mapStateToProps, mapDispatchToProps)
 class EnsureLoggedInContainer extends React.Component {
+  static propTypes = {
+    router: PropTypes.object,
+    saveRedirectBackPath: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
+    children: PropTypes.node,
+  }
+
+  componentWillMount() {
+    this.redirectUnauthenticated();
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { router, saveRedirectBackPath, isLoggedIn } = nextProps;
+    this.redirectUnauthenticated(nextProps);
+  }
+
+  redirectUnauthenticated(props = this.props) {
+    const { router, saveRedirectBackPath, isLoggedIn } = props;
     if (!isLoggedIn) {
       saveRedirectBackPath(router.location.pathname);
       router.replace('/signin');
@@ -32,12 +48,4 @@ class EnsureLoggedInContainer extends React.Component {
   }
 }
 
-EnsureLoggedInContainer.propTypes = {
-  router: React.PropTypes.object,
-  saveRedirectBackPath: React.PropTypes.func,
-  isLoggedIn: React.PropTypes.bool,
-  children: React.PropTypes.node,
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(EnsureLoggedInContainer);
+export default EnsureLoggedInContainer;

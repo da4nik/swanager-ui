@@ -12,6 +12,7 @@ import DevTools from 'dev/redux-dev-tools';
 
 // Load SCSS
 import '../scss/app.scss';
+import Websocket from './modules/websocket';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -42,6 +43,8 @@ if (isProduction) {
 }
 
 export { store, isProduction };
+
+Websocket.startWebsocket();
 
 // Render it to DOM
 ReactDOM.render(
