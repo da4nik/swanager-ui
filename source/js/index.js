@@ -41,7 +41,7 @@ if (isProduction) {
   );
 }
 
-export { store };
+export { store, isProduction };
 
 // Render it to DOM
 ReactDOM.render(

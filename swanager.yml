@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  swanager-ui:
+    image: swanager-ui:latest
+    ports:
+      - "3000:80"
+    networks:
+      - swanager
+
+  swanager:
+    image: swanager:latest
+    environment:
+      - SWANAGER_MONGO_URL=mongodb://172.17.0.2/swanager
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - swanager
+
+networks:
+  swanager:
+    driver: overlay
