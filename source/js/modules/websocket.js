@@ -1,12 +1,22 @@
 import { store } from '../index';
 import { addAutohidedNotification } from '../actions/notifications';
+import { serviceLoaded } from '../actions/services';
 import API from '../api';
 
 const startWebsocket = () => {
   const socket = new WebSocket(API.wsURL);
 
   socket.onmessage = (messageEvent) => {
-    store.dispatch(addAutohidedNotification('WS', messageEvent.data));
+    const message = JSON.parse(messageEvent.data);
+    if (message.service) {
+      store.dispatch(serviceLoaded(message.service));
+    }
+
+    if (message.data) {
+      store.dispatch(addAutohidedNotification('WS', message.data));
+    }
+
+    // store.dispatch(addAutohidedNotification('WS', messageEvent.data));
   };
 
   socket.onopen = () => {
