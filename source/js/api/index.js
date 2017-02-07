@@ -1,8 +1,8 @@
+import config from 'config';
 import { store } from '../index';
 
-const baseHost = 'localhost:4945';
-const apiURL = `http://${ baseHost }/api/v1`;
-const wsURL = `ws://${ baseHost }/ws`;
+const apiURL = config.apiURL;
+const wsURL = config.wsURL;
 
 const getToken = () => {
   const state = store.getState();

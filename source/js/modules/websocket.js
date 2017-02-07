@@ -5,16 +5,17 @@ import API from '../api';
 const startWebsocket = () => {
   const socket = new WebSocket(API.wsURL);
 
-  window.sendWSMessage = (msg) => {
-    socket.send(JSON.stringify(msg));
-  };
-
   socket.onmessage = (messageEvent) => {
     store.dispatch(addAutohidedNotification('WS', messageEvent.data));
   };
 
   socket.onopen = () => {
     store.dispatch(addAutohidedNotification('WS', '* Connected'));
+
+    // Authenticating with authToken
+    const state = store.getState();
+    const token = state.auth.get('authToken');
+    socket.send(JSON.stringify({ token }));
   };
 
   socket.onclose = (event) => {

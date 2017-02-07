@@ -159,6 +159,9 @@ module.exports = {
       path.resolve(__dirname, 'node_modules'),
       jsSourcePath,
     ],
+    alias: {
+      config: path.join(__dirname, 'config', `${ process.env.NODE_ENV || 'development' }.js`),
+    },
   },
   plugins,
   devServer: {
