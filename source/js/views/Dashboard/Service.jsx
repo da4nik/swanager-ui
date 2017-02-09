@@ -49,7 +49,7 @@ class Service extends React.Component {
         <div className='service__description'>
           <ul>
             <li>Image: { service.image }</li>
-            <li>NS Name: { service.ns_name }</li>
+            <li>URL for links: { service.ns_name }</li>
             <li>Replicas: { service.replicas }</li>
           </ul>
         </div>

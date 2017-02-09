@@ -21,7 +21,6 @@ class ServiceForm extends React.Component {
       application_id: service.application_id || app.id,
       name: this.nameInput.value,
       image: this.imageInput.value,
-      ns_name: this.nsNameInput.value,
       replicas: parseInt(this.replicasInput.value, 10),
     };
     saveServ(Object.assign({}, service, updatedService));
@@ -47,15 +46,6 @@ class ServiceForm extends React.Component {
             type='text'
             ref={ (input) => { this.imageInput = input; } }
             defaultValue={ service.image }
-          />
-        </label>
-
-        <label htmlFor='image' className='service-form__input'>
-          {' NS Name: '}
-          <input
-            type='text'
-            ref={ (input) => { this.nsNameInput = input; } }
-            defaultValue={ service.ns_name }
           />
         </label>
 
