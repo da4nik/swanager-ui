@@ -3,6 +3,8 @@ import { addAutohidedNotification } from '../actions/notifications';
 import { serviceLoaded } from '../actions/services';
 import API from '../api';
 
+const reconnectPeriod = 3000;
+
 const startWebsocket = () => {
   const socket = new WebSocket(API.wsURL);
 
@@ -15,8 +17,6 @@ const startWebsocket = () => {
     if (message.data) {
       store.dispatch(addAutohidedNotification('WS', message.data));
     }
-
-    // store.dispatch(addAutohidedNotification('WS', messageEvent.data));
   };
 
   socket.onopen = () => {
@@ -31,7 +31,8 @@ const startWebsocket = () => {
   socket.onclose = (event) => {
     if (event.wasClean) { return; }
 
-    setTimeout(() => { startWebsocket(); }, 1000);
+    // Connection closed unexpectedly, reconnecting
+    setTimeout(() => { startWebsocket(); }, reconnectPeriod);
   };
 
   // socket.onerror = (event) => { };

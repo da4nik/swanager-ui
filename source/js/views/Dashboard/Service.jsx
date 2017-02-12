@@ -1,12 +1,20 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import ServiceForm from './ServiceForm';
 import ServiceStatus from './ServiceStatus';
+import { deleteService } from '../../actions/services';
 
+const mapDispatchToProps = (dispatch) => ({
+  removeServ: (service) => { dispatch(deleteService(service)); },
+});
+
+@connect(null, mapDispatchToProps)
 class Service extends React.Component {
   static propTypes = {
     service: PropTypes.object,
     app: PropTypes.object,
+    removeServ: PropTypes.func,
   }
 
   constructor() {
@@ -20,12 +28,21 @@ class Service extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
 
+  onRemove() {
+    const { service, removeServ } = this.props;
+    removeServ(service);
+  }
+
+  closeForm() {
+    this.setState({ editing: false });
+  }
+
   renderForm() {
     const { service, app } = this.props;
     if (this.state.editing) {
       return (
         <div className='service__form'>
-          <ServiceForm service={ service } app={ app } />
+          <ServiceForm service={ service } app={ app } closeForm={ () => { this.closeForm(); } } />
         </div>
       );
     }
@@ -46,6 +63,17 @@ class Service extends React.Component {
     return (
       <section className='service'>
         <div className='service__title'>{ service.name }</div>
+        <div className='service__buttons'>
+          <button
+            className='service__button'
+            onClick={ () => { this.onEditClicked(); } }
+          >Edit</button>
+          <button
+            className='service__button'
+            onClick={ () => { this.onRemove(); } }
+          >Remove</button>
+        </div>
+        { this.renderForm() }
         <div className='service__description'>
           <ul>
             <li>Image: { service.image }</li>
@@ -56,11 +84,6 @@ class Service extends React.Component {
         <div className='service_status'>
           { this.renderStatus() }
         </div>
-        <button
-          className='service__edit-button'
-          onClick={ () => { this.onEditClicked(); } }
-        >Edit</button>
-        { this.renderForm() }
       </section>
     );
   }

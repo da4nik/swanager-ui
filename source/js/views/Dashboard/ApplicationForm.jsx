@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { saveApplication } from '../../actions/apps';
 
 const mapDispatchToProps = dispatch => ({
-  saveApplication: (application) => { dispatch(saveApplication(application)); },
+  saveApp: (application) => { dispatch(saveApplication(application)); },
 });
 
 @connect(null, mapDispatchToProps)
 class ApplicationForm extends React.Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
-    saveApplication: PropTypes.func,
+    saveApp: PropTypes.func,
+    closeForm: PropTypes.func,
   }
 
   constructor(props) {
@@ -27,9 +28,11 @@ class ApplicationForm extends React.Component {
   }
 
   onSave() {
-    this.props.saveApplication(
+    const { closeForm, saveApp } = this.props;
+    saveApp(
       Object.assign({}, this.props.app, { name: this.state.name })
     );
+    closeForm();
   }
 
   render() {

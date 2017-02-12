@@ -4,28 +4,11 @@ body {
 
 .App {
   margin: 20px auto;
-  max-width: 500px;
+  max-width: 700px;
   width: calc(100% - 40px);
   background: #f5f6f7;
   padding: 20px;
   border-radius: 3px;
-}
-
-.Menu a {
-  display: inline-block;
-  padding: 5px 0;
-  margin-right: 10px;
-}
-
-.BackgroundImgExample {
-  width: 250px;
-  height: 141px;
-  background: url(../assets/img/book1.jpg) no-repeat;
-  background-size: 100% auto;
-}
-
-.ImgExample {
-  width: 250px;
 }
 
 hr {

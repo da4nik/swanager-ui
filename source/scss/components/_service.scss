@@ -1,3 +1,54 @@
+$header-height: 20px;
+$header-margin: 20px;
+
 .service {
-  
+  position: relative;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: ($header-height + $header-margin) 10px 10px 10px;
+  margin: 10px 0;
+  max-width: 500px;
+
+  &__title {
+    color: #777;
+    font-size: large;
+    font-variant: bold;
+    position: absolute;
+    top: 5px; left: 5px;
+    line-height: $header-height;
+  }
+
+  &__buttons {
+    position: absolute;
+    top: 5px; right: 5px;
+  }
+
+
+  &__button {
+    background-color: transparent;
+    border: 0;
+    color: #4682FF;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    text-transform: lowercase;
+    line-height: $header-height;
+    outline: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &_left-spaced {
+      margin-left: 15px;
+    }
+  }
 }

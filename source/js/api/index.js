@@ -114,12 +114,22 @@ const saveService = (service) => {
   });
 };
 
+const removeService = (service) => {
+  return fetch(`${ apiURL }/services/${ service.id }`, {
+    method: 'DELETE',
+    headers: headers(),
+  });
+};
+
+// ################# Exports
+
 export default {
   apiURL,
   wsURL,
   authorize,
   services,
   saveService,
+  removeService,
   applicationAction,
   destroyApplication,
   saveApplication,

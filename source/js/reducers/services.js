@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { SERVICES_LOADED, SERVICE_LOADED } from '../actions';
+import { SERVICES_LOADED, SERVICE_LOADED, SERVICE_REMOVED } from '../actions';
 
 const initialState = Map({});
 
@@ -12,6 +12,8 @@ export default function reducer(state = initialState, action = {}) {
     }
     case SERVICE_LOADED:
       return state.set(action.data.id, action.data);
+    case SERVICE_REMOVED:
+      return state.delete(action.data.id);
     default:
       return state;
   }

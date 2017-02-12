@@ -35,11 +35,15 @@ class Application extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
 
+  closeForm() {
+    this.setState({ editing: false });
+  }
+
   renderEditForm() {
     if (this.state.editing) {
       return (
         <div className='application__form'>
-          <ApplicationForm app={ this.props.app } />
+          <ApplicationForm app={ this.props.app } closeForm={ () => { this.closeForm(); } } />
         </div>
       );
     }

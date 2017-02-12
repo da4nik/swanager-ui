@@ -21,6 +21,10 @@ class Applications extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
 
+  closeForm() {
+    this.setState({ editing: false });
+  }
+
   renderApps() {
     const { apps } = this.props;
 
@@ -31,7 +35,7 @@ class Applications extends React.Component {
 
   renderEditForm() {
     if (this.state.editing) {
-      return (<ApplicationForm app={ {} } />);
+      return (<ApplicationForm app={ {} } closeForm={ () => { this.closeForm(); } } />);
     }
     return null;
   }

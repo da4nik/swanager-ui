@@ -21,6 +21,10 @@ class Services extends React.Component {
     this.setState({ editing: !this.state.editing });
   }
 
+  closeForm() {
+    this.setState({ editing: false });
+  }
+
   renderServices() {
     const { services, app } = this.props;
 
@@ -38,7 +42,13 @@ class Services extends React.Component {
 
   renderServiceForm() {
     if (this.state.editing) {
-      return (<ServiceForm service={ {} } app={ this.props.app } />);
+      return (
+        <ServiceForm
+          service={ {} }
+          app={ this.props.app }
+          closeForm={ () => { this.closeForm(); } }
+        />
+      );
     }
     return null;
   }

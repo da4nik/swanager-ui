@@ -13,10 +13,11 @@ class ServiceForm extends React.Component {
     app: PropTypes.object,
     service: PropTypes.object,
     saveServ: PropTypes.func,
+    closeForm: PropTypes.func,
   }
 
   onSave() {
-    const { service, app, saveServ } = this.props;
+    const { service, app, saveServ, closeForm } = this.props;
     const updatedService = {
       application_id: service.application_id || app.id,
       name: this.nameInput.value,
@@ -24,6 +25,7 @@ class ServiceForm extends React.Component {
       replicas: parseInt(this.replicasInput.value, 10),
     };
     saveServ(Object.assign({}, service, updatedService));
+    closeForm();
   }
 
   render() {
@@ -31,31 +33,39 @@ class ServiceForm extends React.Component {
     return (
       <div className='service-form'>
         <div className='service-form__title'>{'Service form'}</div>
-        <label htmlFor='name' className='service-form__input'>
+        <label htmlFor='name' className='service-form__label'>
           {' Name: '}
           <input
+            className='service-form__input'
             type='text'
             ref={ (input) => { this.nameInput = input; } }
             defaultValue={ service.name }
           />
         </label>
 
-        <label htmlFor='image' className='service-form__input'>
+        <label htmlFor='image' className='service-form__label'>
           {' Image: '}
           <input
+            className='service-form__input'
             type='text'
             ref={ (input) => { this.imageInput = input; } }
             defaultValue={ service.image }
           />
         </label>
 
-        <label htmlFor='replicas' className='service-form__input'>
+        <label htmlFor='replicas' className='service-form__label'>
           {' Replicas: '}
-          <input
-            type='number'
+          <select
+            className='service-form__input'
             ref={ (input) => { this.replicasInput = input; } }
             defaultValue={ service.replicas }
-          />
+          >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
         </label>
 
         <button className='service-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
