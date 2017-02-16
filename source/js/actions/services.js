@@ -91,3 +91,20 @@ export const deleteService = (service) => {
     });
   };
 };
+
+export const applyServiceAction = (service, action) => {
+  let responseStatus;
+  return dispatch => {
+    API.serviceAction(service, action)
+    .then(response => {
+      responseStatus = response.status;
+      return response.json();
+    })
+    .then(payload => {
+
+    })
+    .catch(response => {
+      console.log('[applyServiceAction] Something went wrong.', response);
+    });
+  };
+};

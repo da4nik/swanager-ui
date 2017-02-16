@@ -90,6 +90,11 @@ const applicationAction = (app, action) => {
 
 // ################# SERVICE
 
+const serviceActions = {
+  START: 'start',
+  STOP: 'stop',
+};
+
 const services = () => {
   return fetch(`${ apiURL }/services`, {
     method: 'GET',
@@ -121,6 +126,14 @@ const removeService = (service) => {
   });
 };
 
+const serviceAction = (service, action) => {
+  const url = `${ apiURL }/services/${ service.id }/${ action }`;
+  return fetch(url, {
+    method: 'PUT',
+    headers: headers(),
+  });
+};
+
 // ################# Exports
 
 export default {
@@ -130,6 +143,8 @@ export default {
   services,
   saveService,
   removeService,
+  serviceAction,
+  serviceActions,
   applicationAction,
   destroyApplication,
   saveApplication,

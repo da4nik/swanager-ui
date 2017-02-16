@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 import ServiceForm from './ServiceForm';
 import ServiceStatus from './ServiceStatus';
-import { deleteService } from '../../actions/services';
+import { deleteService, applyServiceAction } from '../../actions/services';
+import API from '../../api';
 
 const mapDispatchToProps = (dispatch) => ({
   removeServ: (service) => { dispatch(deleteService(service)); },
+  applyAction: (service, action) => { dispatch(applyServiceAction(service, action)); },
 });
 
 @connect(null, mapDispatchToProps)
@@ -15,6 +17,7 @@ class Service extends React.Component {
     service: PropTypes.object,
     app: PropTypes.object,
     removeServ: PropTypes.func,
+    applyAction: PropTypes.func,
   }
 
   constructor() {
@@ -59,11 +62,19 @@ class Service extends React.Component {
   }
 
   render() {
-    const { service } = this.props;
+    const { service, applyAction } = this.props;
     return (
       <section className='service'>
         <div className='service__title'>{ service.name }</div>
         <div className='service__buttons'>
+          <button
+            className='service__button'
+            onClick={ () => { applyAction(service, API.serviceActions.START); } }
+          >Start</button>
+          <button
+            className='service__button'
+            onClick={ () => { applyAction(service, API.serviceActions.STOP); } }
+          >Stop</button>
           <button
             className='service__button'
             onClick={ () => { this.onEditClicked(); } }
