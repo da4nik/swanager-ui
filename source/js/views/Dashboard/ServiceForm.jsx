@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { saveService } from '../../actions/services';
+import EnvVarsForm from './EnvVarsForm';
 
 const mapDispatchToProps = dispatch => ({
   saveServ: (service) => { dispatch(saveService(service)); },
@@ -16,6 +17,15 @@ class ServiceForm extends React.Component {
     closeForm: PropTypes.func,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = { vars: props.service.env };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
+  }
+
   onSave() {
     const { service, app, saveServ, closeForm } = this.props;
     const updatedService = {
@@ -23,9 +33,14 @@ class ServiceForm extends React.Component {
       name: this.nameInput.value,
       image: this.imageInput.value,
       replicas: parseInt(this.replicasInput.value, 10),
+      env: this.state.vars,
     };
     saveServ(Object.assign({}, service, updatedService));
     closeForm();
+  }
+
+  onVarsChanged(vars) {
+    this.setState({ vars });
   }
 
   render() {
@@ -67,6 +82,11 @@ class ServiceForm extends React.Component {
             <option>5</option>
           </select>
         </label>
+
+        <EnvVarsForm
+          vars={ this.state.vars }
+          onVarsChanged={ (vars) => { this.onVarsChanged(vars); } }
+        />
 
         <button className='service-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
       </div>
