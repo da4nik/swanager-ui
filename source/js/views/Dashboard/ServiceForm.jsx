@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { saveService } from '../../actions/services';
 import EnvVarsForm from './EnvVarsForm';
+import PublishedPortsForm from './PublishedPortsForm';
 
 const mapDispatchToProps = dispatch => ({
   saveServ: (service) => { dispatch(saveService(service)); },
@@ -19,7 +20,10 @@ class ServiceForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { vars: props.service.env };
+    this.state = {
+      vars: props.service.env,
+      ports: props.service.published_ports,
+    };
   }
 
   shouldComponentUpdate(nextProps) {
@@ -28,12 +32,14 @@ class ServiceForm extends React.Component {
 
   onSave() {
     const { service, app, saveServ, closeForm } = this.props;
+    const { vars, ports } = this.state;
     const updatedService = {
       application_id: service.application_id || app.id,
       name: this.nameInput.value,
       image: this.imageInput.value,
       replicas: parseInt(this.replicasInput.value, 10),
-      env: this.state.vars,
+      env: vars,
+      published_ports: ports,
     };
     saveServ(Object.assign({}, service, updatedService));
     closeForm();
@@ -41,6 +47,10 @@ class ServiceForm extends React.Component {
 
   onVarsChanged(vars) {
     this.setState({ vars });
+  }
+
+  onPortsChanged(ports) {
+    this.setState({ ports });
   }
 
   render() {
@@ -86,6 +96,11 @@ class ServiceForm extends React.Component {
         <EnvVarsForm
           vars={ this.state.vars }
           onVarsChanged={ (vars) => { this.onVarsChanged(vars); } }
+        />
+
+        <PublishedPortsForm
+          ports={ this.state.ports }
+          onPortsChanged={ (ports) => { this.onPortsChanged(ports); } }
         />
 
         <button className='service-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
