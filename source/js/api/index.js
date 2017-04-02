@@ -41,6 +41,21 @@ const authorize = (email, password) => {
   });
 };
 
+const signout = (email, password) => {
+  return fetch(`${ apiURL }/session`, {
+    method: 'DELETE',
+    headers: headers(),
+  });
+};
+
+const signup = (email, password, password_confirmation) => {
+  return fetch(`${ apiURL }/users`, {
+    method: 'POST',
+    body: JSON.stringify({ email, password, password_confirmation }),
+    headers: headers(),
+  });
+};
+
 // ################# APPLICATION
 
 const appActions = {
@@ -140,6 +155,8 @@ export default {
   apiURL,
   wsURL,
   authorize,
+  signout,
+  signup,
   services,
   saveService,
   removeService,
