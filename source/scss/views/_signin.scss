@@ -1,0 +1,44 @@
+$signin_width: 450px;
+
+.signin {
+  max-width: $signin_width;
+  margin: 100px auto 0;
+  position: relative;
+
+  &__header {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  &__form {
+    input {
+      width: 100%;
+      margin: 5px 0;
+      padding: 5px;
+    }
+
+    button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+  }
+}
+
+.signin_bottom {
+  max-width: $signin_width;
+  margin: 10px auto;
+  padding: 12px;
+  
+  p {
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+  }
+}
+
