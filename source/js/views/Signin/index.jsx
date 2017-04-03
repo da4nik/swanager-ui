@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import InputField from '../../components/Inputs/InputField';
-import { signin, signinLoaded } from '../../actions/signin';
+import { signin, signinLoaded, signinSetError } from '../../actions/signin';
 
 const mapDispatchToProps = dispatch => ({
-  signinLoaded: () => {
-    return dispatch(signinLoaded());
-  },
-  signin: (email, password) => {
-    return dispatch(signin(email, password));
-  },
+  signinLoaded: () => dispatch(signinLoaded()),
+  signinSetError: (error) => dispatch(signinSetError(error)),
+  signin: (email, password) => dispatch(signin(email, password)),
 });
 
 const mapStoreToProps = ({ auth }, { router }) => {
@@ -29,6 +26,7 @@ class Signin extends React.Component {
 
   static propTypes = {
     signinLoaded: PropTypes.func,
+    signinSetError: PropTypes.func,
     signin: PropTypes.func,
     isLoggedIn: PropTypes.bool,
     redirectPath: PropTypes.string,
@@ -57,9 +55,15 @@ class Signin extends React.Component {
   }
 
   onSignin(event) {
-    const { email, password } = this.state;
-    this.props.signin(email, password);
     event.preventDefault();
+    const { email, password } = this.state;
+    if (email, password) {
+      this.props.signin(email, password);
+    } else {
+      this.props.signinSetError('Email or Password is empty');
+    }
+    
+    
   }
 
   onPasswordChanged(event) {
@@ -87,6 +91,7 @@ class Signin extends React.Component {
   }
 
   render() {
+    console.log(this);
     return (
       <div>
         <section className='container signin'>

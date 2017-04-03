@@ -48,14 +48,10 @@ const signout = () => {
   });
 };
 
-const signup = (signupEmail, signupPassword, signupPasswordConfirmation) => {
+const signup = (email, password, PasswordConfirmation) => {
   return fetch(`${ apiURL }/users`, {
     method: 'POST',
-    body: JSON.stringify({
-      email: signupEmail,
-      password: signupPassword,
-      password_confirmation: signupPasswordConfirmation,
-    }),
+    body: JSON.stringify({ email, password, password_confirmation: PasswordConfirmation }),
     headers: headers(),
   });
 };

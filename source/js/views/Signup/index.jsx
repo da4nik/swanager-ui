@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import InputField from '../../components/Inputs/InputField';
-import { doSignup, resetSignup } from '../../actions/signup';
+import { doSignup, resetSignup, signupSetError } from '../../actions/signup';
 
 import { ROUTE_SIGN_IN } from '../../routes';
 
 const mapDispatchToProps = dispatch => ({
-  resetSignup: () => {
-    return dispatch(resetSignup());
-  },
-  signup: (email, password, passwordConfirmation) => {
-    return dispatch(doSignup(email, password, passwordConfirmation));
-  },
+  resetSignup: () => dispatch(resetSignup()),
+  signupSetError: (error) => dispatch(signupSetError(error)),
+  signup: (email, password, passwordConfirmation) => dispatch(doSignup(email, password, passwordConfirmation)),
 });
 
 const mapStoreToProps = ({ signup, auth }, { router }) => {
@@ -31,6 +28,7 @@ class Signup extends React.Component {
 
   static propTypes = {
     resetSignup: PropTypes.func,
+    signupSetError: PropTypes.func,
     signup: PropTypes.func,
     responseData: PropTypes.object,
     isLoggedIn: PropTypes.bool,
@@ -62,9 +60,13 @@ class Signup extends React.Component {
   // UI EVENTS
 
   onSignup(event) {
-    const { email, password, passwordConfirmation } = this.state;
-    this.props.signup(email, password, passwordConfirmation);
     event.preventDefault();
+    const { email, password, passwordConfirmation } = this.state;
+    if (email, password) {
+      this.props.signup(email, password, passwordConfirmation);
+    } else {
+      this.props.signupSetError('Email or Password is empty');
+    }
   }
 
   onEmailChanged(event) {
@@ -100,6 +102,7 @@ class Signup extends React.Component {
 
   renderErrors() {
     const { errors } = this.props;
+
     if (errors) {
       return (<p>{ errors }</p>);
     }

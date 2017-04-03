@@ -9,7 +9,7 @@ export default function reducer(state = initialState, action = {}) {
       return state.set('errors', null).set('data', null);
 
     case SIGN_UP_SUCCESS:
-      return state.set('data', action.data);
+      return state.set('errors', null).set('data', action.data);
 
     case SIGN_UP_ERROR:
       return state.set('errors', action.data);
