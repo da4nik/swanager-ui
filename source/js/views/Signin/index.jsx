@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
     return dispatch(signinLoaded());
   },
   signin: (email, password) => {
-    return dispatch(signin(email, password))
+    return dispatch(signin(email, password));
   },
 });
 

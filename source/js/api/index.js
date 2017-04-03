@@ -41,17 +41,21 @@ const authorize = (email, password) => {
   });
 };
 
-const signout = (email, password) => {
+const signout = () => {
   return fetch(`${ apiURL }/session`, {
     method: 'DELETE',
     headers: headers(),
   });
 };
 
-const signup = (email, password, password_confirmation) => {
+const signup = (signupEmail, signupPassword, signupPasswordConfirmation) => {
   return fetch(`${ apiURL }/users`, {
     method: 'POST',
-    body: JSON.stringify({ email, password, password_confirmation }),
+    body: JSON.stringify({
+      email: signupEmail,
+      password: signupPassword,
+      password_confirmation: signupPasswordConfirmation,
+    }),
     headers: headers(),
   });
 };

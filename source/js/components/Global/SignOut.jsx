@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { signout } from '../../actions/signin';
 
 const mapDispatchToProps = dispatch => ({
-  signout: () => dispatch(signout())
+  signout: () => dispatch(signout()),
 });
 
-const mapStoreToProps = ({ auth }, { router }) => ({});
+const mapStoreToProps = () => {
+  return {};
+};
 
 @connect(mapStoreToProps, mapDispatchToProps)
 export default class SignOut extends Component {
