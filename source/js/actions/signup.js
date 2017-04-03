@@ -4,6 +4,7 @@ import { RESET_SIGN_UP, SIGN_UP_SUCCESS, SIGN_UP_ERROR } from './index';
 export const resetSignup = (signupData) => ({ type: RESET_SIGN_UP, data: signupData });
 export const signupSuccess = (signupData) => ({ type: SIGN_UP_SUCCESS, data: signupData });
 export const signupError = (signupData) => ({ type: SIGN_UP_ERROR, data: signupData });
+export const signupSetError = (error) => ({ type: SIGN_UP_ERROR, data: error });
 
 export const doSignup = (email, password, passwordConfirmation) => {
   let responseCode;

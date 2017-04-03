@@ -6,11 +6,7 @@ const mapDispatchToProps = dispatch => ({
   signout: () => dispatch(signout()),
 });
 
-const mapStoreToProps = () => {
-  return {};
-};
-
-@connect(mapStoreToProps, mapDispatchToProps)
+@connect({}, mapDispatchToProps)
 export default class SignOut extends Component {
   static propTypes = {
     signout: PropTypes.func,
