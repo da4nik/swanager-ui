@@ -34,6 +34,7 @@ export const signin = (email, password) => {
       }
     })
     .catch(() => {
+      dispatch(errorSigningIn('Unknown error'));
     });
   };
 };

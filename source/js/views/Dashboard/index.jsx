@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
     return (
       <div className='container dashboard'>
         <h1>{'Dashboard'}</h1>
-        <SignOut/>
+        <SignOut />
         <Applications apps={ this.props.apps } />
       </div>
     );

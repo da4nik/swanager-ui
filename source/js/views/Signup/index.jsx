@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import InputField from '../../components/Inputs/InputField';
-import { signup, resetSignup } from '../../actions/signup';
+import { doSignup, resetSignup } from '../../actions/signup';
 
-import { ROUTE_SIGN_IN } from '../../routes'
+import { ROUTE_SIGN_IN } from '../../routes';
 
 const mapDispatchToProps = dispatch => ({
   resetSignup: () => {
     return dispatch(resetSignup());
   },
-  signup: (email, password, password_confirmation) => {
-    return dispatch(signup(email, password, password_confirmation));
+  signup: (email, password, passwordConfirmation) => {
+    return dispatch(doSignup(email, password, passwordConfirmation));
   },
 });
 
@@ -32,7 +32,7 @@ class Signup extends React.Component {
   static propTypes = {
     resetSignup: PropTypes.func,
     signup: PropTypes.func,
-    responseData: React.PropTypes.object,
+    responseData: PropTypes.object,
     isLoggedIn: PropTypes.bool,
     router: PropTypes.object,
     errors: PropTypes.oneOfType([
@@ -46,7 +46,7 @@ class Signup extends React.Component {
     this.state = {
       email: '',
       password: '',
-      password_confirmation: '',
+      passwordConfirmation: '',
     };
   }
 
@@ -59,26 +59,11 @@ class Signup extends React.Component {
     this.redirectAuthenticated(nextProps);
   }
 
-  redirectAuthenticated(nextProps = this.props) {
-    const { isLoggedIn, responseData, router } = nextProps;
-
-    if (isLoggedIn) {
-      return router.replace('/');
-    }
-    
-    // if success register
-    if (responseData) {
-      this.props.resetSignup();
-      router.push(ROUTE_SIGN_IN);
-    }
-  }
-
-
   // UI EVENTS
 
   onSignup(event) {
-    const { email, password, password_confirmation } = this.state;
-    this.props.signup(email, password, password_confirmation);
+    const { email, password, passwordConfirmation } = this.state;
+    this.props.signup(email, password, passwordConfirmation);
     event.preventDefault();
   }
 
@@ -91,7 +76,23 @@ class Signup extends React.Component {
   }
 
   onPasswordConfirmationChanged(event) {
-    this.setState({ password_confirmation: event.target.value });
+    this.setState({ passwordConfirmation: event.target.value });
+  }
+
+  // END UI EVENTS
+
+  redirectAuthenticated(nextProps = this.props) {
+    const { isLoggedIn, responseData, router } = nextProps;
+
+    if (isLoggedIn) {
+      router.replace('/');
+    }
+
+    // if success register
+    if (responseData) {
+      this.props.resetSignup();
+      router.push(ROUTE_SIGN_IN);
+    }
   }
 
 
@@ -113,7 +114,7 @@ class Signup extends React.Component {
           <form className='signin__form' onSubmit={ (event) => { this.onSignup(event); } }>
             <InputField inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
             <InputField inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
-            <InputField inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.password_confirmation } placeholder='Password Confirmation' />
+            <InputField inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
             { this.renderErrors() }
             <button type='submit'>Sign up</button>
           </form>
