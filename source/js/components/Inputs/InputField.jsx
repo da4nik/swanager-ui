@@ -7,16 +7,16 @@ class InputField extends React.Component {
     onChange: React.PropTypes.func,
     value: React.PropTypes.string,
     placeholder: React.PropTypes.string,
-    className: React.PropTypes.string,
+    inputClass: React.PropTypes.string,
   }
 
   render() {
-    const { title, inputType, onChange, value, placeholder, className } = this.props;
+    const { title, inputType, onChange, value, placeholder, inputClass } = this.props;
     return (
       <div>
         <label htmlFor='email'>
           { title }
-          <input className={ className } name='email' type={ inputType } onChange={ onChange } value={ value } placeholder={ placeholder } />
+          <input className={ inputClass } name='email' type={ inputType } onChange={ onChange } value={ value } placeholder={ placeholder } />
         </label>
       </div>
     );
