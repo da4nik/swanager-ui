@@ -57,13 +57,11 @@ class Signin extends React.Component {
   onSignin(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    if (email, password) {
+    if (email && password) {
       this.props.signin(email, password);
     } else {
       this.props.signinSetError('Email or Password is empty');
     }
-    
-    
   }
 
   onPasswordChanged(event) {
@@ -91,14 +89,13 @@ class Signin extends React.Component {
   }
 
   render() {
-    console.log(this);
     return (
       <section className='container signin'>
         <div className='signinTop'>
           <h2 className='signinHeader'>Log-in to your account</h2>
           <form className='signinForm' onSubmit={ (event) => { this.onSignin(event); } }>
-            <InputField className='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField className='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+            <InputField inputClass='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField inputClass='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
             { this.renderErrors() }
             <button className='submitBtn' type='submit'>{ 'Sign in' }</button>
           </form>

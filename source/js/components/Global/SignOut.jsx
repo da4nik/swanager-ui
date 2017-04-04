@@ -12,14 +12,9 @@ export default class SignOut extends Component {
     signout: PropTypes.func,
   }
 
-  onSignOut(event) {
-    event.preventDefault();
-    this.props.signout();
-  }
-
   render() {
     return (
-      <button type='submit' className='SignOut' onClick={ (event) => { this.onSignOut(event); } }>Sign Out</button>
+      <button type='submit' className='SignOut' onClick={ () => { this.props.signout(); } }>Sign Out</button>
     );
   }
 }

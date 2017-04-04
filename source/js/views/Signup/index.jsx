@@ -62,7 +62,7 @@ class Signup extends React.Component {
   onSignup(event) {
     event.preventDefault();
     const { email, password, passwordConfirmation } = this.state;
-    if (email, password) {
+    if (email && password) {
       this.props.signup(email, password, passwordConfirmation);
     } else {
       this.props.signupSetError('Email or Password is empty');
@@ -115,9 +115,9 @@ class Signup extends React.Component {
         <div className='signinTop'>
           <h2 className='signinHeader'>Create your account</h2>
           <form className='signinForm' onSubmit={ (event) => { this.onSignup(event); } }>
-            <InputField className='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField className='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
-            <InputField className='inputField' inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
+            <InputField inputClass='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField inputClass='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+            <InputField inputClass='inputField' inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
             { this.renderErrors() }
             <button className='submitBtn' type='submit'>Sign up</button>
           </form>
