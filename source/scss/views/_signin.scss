@@ -1,11 +1,11 @@
 $signin_width: 450px;
 
-.signin {
+.authBlock {
   max-width: $signin_width;
   margin: 100px auto 0;
   position: relative;
 
-  .signin-top {
+  .signin {
     background: #f5f6f7;
     padding: 20px;
     border-radius: 3px;
@@ -16,19 +16,13 @@ $signin_width: 450px;
     }
 
     .signin-form {
-      &__email {
+      &__input {
         width: 100%;
         margin: 5px 0;
         padding: 5px;
       }
 
-      &__password {
-        width: 100%;
-        margin: 5px 0;
-        padding: 5px;
-      }
-
-      &__submit {
+      &__button {
         width: 100%;
         margin: 8px 0;
         padding: 8px;
@@ -42,18 +36,15 @@ $signin_width: 450px;
   }
 
   
-  .signin-bottom {
+  .goToSignUp {
     max-width: $signin_width;
     margin: 10px auto;
     background: #f5f6f7;
     padding: 20px;
     border-radius: 3px;
     padding: 12px;
+    text-align: center;
+    font-size: 13px;
   
-    &__goToSignUp {
-      margin: 0;
-      text-align: center;
-      font-size: 13px;
-    }
   }
 }
