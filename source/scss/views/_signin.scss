@@ -5,38 +5,38 @@ $signin_width: 450px;
   margin: 100px auto 0;
   position: relative;
 
-  .signinTop {
+  .signin-top {
     background: #f5f6f7;
     padding: 20px;
     border-radius: 3px;
 
-    .signinHeader {
+    &__header {
       margin-top: 0;
       text-align: center;
     }
 
-    .signinForm {
-      .inputField {
+    .signin-form {
+      &__input {
         width: 100%;
         margin: 5px 0;
         padding: 5px;
       }
 
-      .submitBtn {
+      &__button {
         width: 100%;
         margin: 8px 0;
         padding: 8px;
         cursor: pointer;
       }
 
-      .formError {
+      &__error {
         margin: 5px 0;
       }
     }
   }
 
   
-  .signinBottom {
+  .signin-bottom {
     max-width: $signin_width;
     margin: 10px auto;
     background: #f5f6f7;
@@ -44,7 +44,7 @@ $signin_width: 450px;
     border-radius: 3px;
     padding: 12px;
   
-    .goToSignUp {
+    &__goToSignUp {
       margin: 0;
       text-align: center;
       font-size: 13px;
