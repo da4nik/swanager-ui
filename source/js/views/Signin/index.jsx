@@ -91,17 +91,17 @@ class Signin extends React.Component {
   render() {
     return (
       <section className='container signin'>
-        <div className='signinTop'>
-          <h2 className='signinHeader'>Log-in to your account</h2>
-          <form className='signinForm' onSubmit={ (event) => { this.onSignin(event); } }>
-            <InputField inputClass='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField inputClass='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+        <div className='signin-top'>
+          <h2 className='signin-top__header'>Log-in to your account</h2>
+          <form className='signin-form' onSubmit={ (event) => { this.onSignin(event); } }>
+            <InputField inputClass='signin-form__input' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField inputClass='signin-form__input' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
             { this.renderErrors() }
-            <button className='submitBtn' type='submit'>{ 'Sign in' }</button>
+            <button className='signin-form__button' type='submit'>{ 'Sign in' }</button>
           </form>
         </div>
-        <div className='signinBottom'>
-          <p className='goToSignUp'>
+        <div className='signin-bottom'>
+          <p className='signin-bottom__goToSignUp'>
             <span>New to us? </span>
             <Link to='/signup'>Sign Up</Link>
           </p>

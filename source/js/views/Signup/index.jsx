@@ -112,18 +112,18 @@ class Signup extends React.Component {
   render() {
     return (
       <section className='container signin'>
-        <div className='signinTop'>
-          <h2 className='signinHeader'>Create your account</h2>
-          <form className='signinForm' onSubmit={ (event) => { this.onSignup(event); } }>
-            <InputField inputClass='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField inputClass='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
-            <InputField inputClass='inputField' inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
+        <div className='signin-top'>
+          <h2 className='signin-top__header'>Create your account</h2>
+          <form className='signin-form' onSubmit={ (event) => { this.onSignup(event); } }>
+            <InputField inputClass='signin-form__input' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField inputClass='signin-form__input' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+            <InputField inputClass='signin-form__input' inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
             { this.renderErrors() }
-            <button className='submitBtn' type='submit'>Sign up</button>
+            <button className='signin-form__button' type='submit'>Sign up</button>
           </form>
         </div>
-        <div className='signinBottom'>
-          <p className='goToSignUp'>
+        <div className='signin-bottom'>
+          <p className='signin-bottom__goToSignUp'>
             <span>Already registered? </span>
             <Link to='/signin'>Sign In</Link>
           </p>

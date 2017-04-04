@@ -14,7 +14,7 @@ export default class SignOut extends Component {
 
   render() {
     return (
-      <button type='submit' className='SignOut' onClick={ () => { this.props.signout(); } }>Sign Out</button>
+      <button type='submit' className='sign-out' onClick={ () => { this.props.signout(); } }>Sign Out</button>
     );
   }
 }
