@@ -16,13 +16,19 @@ $signin_width: 450px;
     }
 
     .signin-form {
-      &__input {
+      &__email {
         width: 100%;
         margin: 5px 0;
         padding: 5px;
       }
 
-      &__button {
+      &__password {
+        width: 100%;
+        margin: 5px 0;
+        padding: 5px;
+      }
+
+      &__submit {
         width: 100%;
         margin: 8px 0;
         padding: 8px;
