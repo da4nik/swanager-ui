@@ -5,40 +5,49 @@ $signin_width: 450px;
   margin: 100px auto 0;
   position: relative;
 
-  &__header {
-    margin-top: 0;
-    text-align: center;
+  .signinTop {
+    background: #f5f6f7;
+    padding: 20px;
+    border-radius: 3px;
+
+    .signinHeader {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .signinForm {
+      .inputField {
+        width: 100%;
+        margin: 5px 0;
+        padding: 5px;
+      }
+
+      .submitBtn {
+        width: 100%;
+        margin: 8px 0;
+        padding: 8px;
+        cursor: pointer;
+      }
+
+      .formError {
+        margin: 5px 0;
+      }
+    }
   }
 
-  &__form {
-    input {
-      width: 100%;
-      margin: 5px 0;
-      padding: 5px;
-    }
-
-    button {
-      width: 100%;
-      margin: 8px 0;
-      padding: 8px;
-      cursor: pointer;
-    }
-
-    p {
-      margin: 5px 0;
-    }
-  }
-}
-
-.signin_bottom {
-  max-width: $signin_width;
-  margin: 10px auto;
-  padding: 12px;
   
-  p {
-    margin: 0;
-    text-align: center;
-    font-size: 13px;
+  .signinBottom {
+    max-width: $signin_width;
+    margin: 10px auto;
+    background: #f5f6f7;
+    padding: 20px;
+    border-radius: 3px;
+    padding: 12px;
+  
+    .goToSignUp {
+      margin: 0;
+      text-align: center;
+      font-size: 13px;
+    }
   }
 }
-
