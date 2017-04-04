@@ -94,10 +94,10 @@ class Signin extends React.Component {
         <div className='signin-top'>
           <h2 className='signin-top__header'>Log-in to your account</h2>
           <form className='signin-form' onSubmit={ (event) => { this.onSignin(event); } }>
-            <InputField inputClass='signin-form__input' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField inputClass='signin-form__input' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+            <InputField inputClass='signin-form__email' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField inputClass='signin-form__password' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
             { this.renderErrors() }
-            <button className='signin-form__button' type='submit'>{ 'Sign in' }</button>
+            <button className='signin-form__submit' type='submit'>{ 'Sign in' }</button>
           </form>
         </div>
         <div className='signin-bottom'>
