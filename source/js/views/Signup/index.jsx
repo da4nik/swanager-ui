@@ -104,31 +104,31 @@ class Signup extends React.Component {
     const { errors } = this.props;
 
     if (errors) {
-      return (<p>{ errors }</p>);
+      return (<p className='formError'>{ errors }</p>);
     }
     return null;
   }
 
   render() {
     return (
-      <div>
-        <section className='container signin'>
-          <h2 className='signin__header'>Create your account</h2>
-          <form className='signin__form' onSubmit={ (event) => { this.onSignup(event); } }>
-            <InputField inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
-            <InputField inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
+      <section className='container signin'>
+        <div className='signinTop'>
+          <h2 className='signinHeader'>Create your account</h2>
+          <form className='signinForm' onSubmit={ (event) => { this.onSignup(event); } }>
+            <InputField className='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField className='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+            <InputField className='inputField' inputType='password' onChange={ (event) => { this.onPasswordConfirmationChanged(event); } } value={ this.state.passwordConfirmation } placeholder='Password Confirmation' />
             { this.renderErrors() }
-            <button type='submit'>Sign up</button>
+            <button className='submitBtn' type='submit'>Sign up</button>
           </form>
-        </section>
-        <section className='container signin_bottom'>
-          <p>
+        </div>
+        <div className='signinBottom'>
+          <p className='goToSignUp'>
             <span>Already registered? </span>
             <Link to='/signin'>Sign In</Link>
           </p>
-        </section>
-      </div>
+        </div>
+      </section>
     );
   }
 }

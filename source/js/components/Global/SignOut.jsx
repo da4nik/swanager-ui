@@ -6,22 +6,20 @@ const mapDispatchToProps = dispatch => ({
   signout: () => dispatch(signout()),
 });
 
-@connect({}, mapDispatchToProps)
+@connect(null, mapDispatchToProps)
 export default class SignOut extends Component {
   static propTypes = {
     signout: PropTypes.func,
   }
 
   onSignOut(event) {
-    this.props.signout();
     event.preventDefault();
+    this.props.signout();
   }
 
   render() {
     return (
-      <form className='SignOut' onSubmit={ (event) => { this.onSignOut(event); } }>
-        <button type='submit'>Sign Out</button>
-      </form>
+      <button type='submit' className='SignOut' onClick={ (event) => { this.onSignOut(event); } }>Sign Out</button>
     );
   }
 }

@@ -85,7 +85,7 @@ class Signin extends React.Component {
   renderErrors() {
     const { authErrors } = this.props;
     if (authErrors) {
-      return (<p>{ authErrors }</p>);
+      return (<p className='formError'>{ authErrors }</p>);
     }
     return null;
   }
@@ -93,23 +93,23 @@ class Signin extends React.Component {
   render() {
     console.log(this);
     return (
-      <div>
-        <section className='container signin'>
-          <h2 className='signin__header'>Log-in to your account</h2>
-          <form className='signin__form' onSubmit={ (event) => { this.onSignin(event); } }>
-            <InputField inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
-            <InputField inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
+      <section className='container signin'>
+        <div className='signinTop'>
+          <h2 className='signinHeader'>Log-in to your account</h2>
+          <form className='signinForm' onSubmit={ (event) => { this.onSignin(event); } }>
+            <InputField className='inputField' inputType='text' onChange={ (event) => { this.onEmailChanged(event); } } value={ this.state.email } placeholder='E-mail address' />
+            <InputField className='inputField' inputType='password' onChange={ (event) => { this.onPasswordChanged(event); } } value={ this.state.password } placeholder='Password' />
             { this.renderErrors() }
-            <button type='submit'>{ 'Sign in' }</button>
+            <button className='submitBtn' type='submit'>{ 'Sign in' }</button>
           </form>
-        </section>
-        <section className='container signin_bottom'>
-          <p>
+        </div>
+        <div className='signinBottom'>
+          <p className='goToSignUp'>
             <span>New to us? </span>
             <Link to='/signup'>Sign Up</Link>
           </p>
-        </section>
-      </div>
+        </div>
+      </section>
     );
   }
 }
