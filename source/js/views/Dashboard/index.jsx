@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { loadApplications } from '../../actions/apps';
 import Applications from './Applications';
+import SignOut from '../../components/Global/SignOut';
 
 
 const mapStoreToProps = ({ apps }) => ({ apps });
@@ -30,8 +31,9 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div className='dashboard'>
+      <div className='container dashboard'>
         <h1>{'Dashboard'}</h1>
+        <SignOut />
         <Applications apps={ this.props.apps } />
       </div>
     );

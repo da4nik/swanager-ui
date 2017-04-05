@@ -57,7 +57,6 @@ class ServiceForm extends React.Component {
   }
 
   onVolumesChanged(volumes) {
-    console.log('Volumes ', volumes);
     this.setState({ volumes });
   }
 

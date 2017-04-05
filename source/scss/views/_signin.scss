@@ -1,0 +1,50 @@
+$signin_width: 450px;
+
+.authBlock {
+  max-width: $signin_width;
+  margin: 100px auto 0;
+  position: relative;
+
+  .signin {
+    background: #f5f6f7;
+    padding: 20px;
+    border-radius: 3px;
+
+    &__header {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .signin-form {
+      &__input {
+        width: 100%;
+        margin: 5px 0;
+        padding: 5px;
+      }
+
+      &__button {
+        width: 100%;
+        margin: 8px 0;
+        padding: 8px;
+        cursor: pointer;
+      }
+
+      &__error {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  
+  .goToSignUp {
+    max-width: $signin_width;
+    margin: 10px auto;
+    background: #f5f6f7;
+    padding: 20px;
+    border-radius: 3px;
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+  
+  }
+}

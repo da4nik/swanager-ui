@@ -10,9 +10,16 @@ export const SERVICE_REMOVED = 'SERVICE_REMOVED';
 
 // Signin
 export const SIGNED_IN = 'SIGNED_IN';
+export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const ERROR_SIGINIG_IN = 'ERROR_SIGINIG_IN';
 export const SAVE_CURRENT_PATH = 'SAVE_CURRENT_PATH';
 export const UNAUTHORIZED = 'UNAUTHORIZED';
+export const SIGN_IN_RESET = 'SIGN_IN_RESET';
+
+// Sign Up
+export const RESET_SIGN_UP = 'RESET_SIGN_UP';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 
 // Notifications
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';

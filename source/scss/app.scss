@@ -1,9 +1,14 @@
 @import "base/normalize";
 @import "base/app";
 
+@import "views/signin";
+@import "views/dashboard";
+
 @import "components/application";
 @import "components/applications";
 @import "components/service";
 @import "components/services";
 @import "components/service_form";
 @import "components/notifications";
+@import "components/signout";
+
