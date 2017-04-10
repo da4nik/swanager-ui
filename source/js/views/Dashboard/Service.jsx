@@ -55,7 +55,11 @@ class Service extends React.Component {
   renderStatus() {
     const { service } = this.props;
     return service.status ?
-      service.status.map((status) => {
+      service.status.sort((a, b) => {
+        if (a.timestamp > b.timestamp) { return -1; }
+        if (a.timestamp < b.timestamp) { return 1; }
+        return 0;
+      }).map((status) => {
         return (<ServiceStatus key={ status.replica_id } status={ status } />);
       }) :
       null;
@@ -93,6 +97,7 @@ class Service extends React.Component {
           </ul>
         </div>
         <div className='service_status'>
+          <div className='service_status__title'>Status:</div>
           { this.renderStatus() }
         </div>
       </section>

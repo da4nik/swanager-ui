@@ -1,0 +1,22 @@
+.service_status {
+
+  &__title {
+    text-transform: uppercase;
+    color: DarkBlue;
+  }
+
+  &__task {
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__task_with-error {
+    color: #600;
+  }
+
+  &__error {
+    color: #AAA;
+  }
+}
