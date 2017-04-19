@@ -7,7 +7,7 @@ $header-margin: 20px;
   border-radius: 5px;
   border: 1px solid #aaa;
   padding: ($header-height + $header-margin) 10px 10px 10px;
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
   max-width: 500px;
 
   &__title {
@@ -50,5 +50,24 @@ $header-margin: 20px;
     &_left-spaced {
       margin-left: 15px;
     }
+  }
+
+  &__description {
+    margin-bottom: 5px;
+  }
+
+  &__detail_value {
+    font-size: small;
+    color: #AAA;
+    margin-bottom: 5px;
+  }
+
+  &__details_trigger {
+    border: 0;
+    background: none;
+    outline: none;
+    color: #4682FF;
+    cursor: pointer;
+    margin-bottom: 10px;
   }
 }
