@@ -4,6 +4,7 @@ class StringArrayForm extends Component {
   static propTypes = {
     entities: PropTypes.array.isRequired,
     saveEntities: PropTypes.func,
+    title: PropTypes.string,
   }
 
   constructor(props) {
@@ -39,7 +40,7 @@ class StringArrayForm extends Component {
 
   render() {
     return (<div>
-      {' String array form '}
+      { this.props.title || ' String array form '}
       <button
         onClick={ () => { this.addNewEntity(); } }
       >Add one</button>

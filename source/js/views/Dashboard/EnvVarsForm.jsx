@@ -47,6 +47,12 @@ class EnvVarsForm extends React.Component {
     return Object.values(vars).map((value) => value);
   }
 
+  addNew() {
+    const { vars } = this.state;
+    vars[guidGenerator()] = { name: '', value: '' };
+    this.setState({ vars });
+  }
+
   renderEnvVars() {
     const { vars } = this.state;
     return Object.keys(vars).map((key) => {
@@ -75,6 +81,7 @@ class EnvVarsForm extends React.Component {
     return (
       <div className={ EnvVarsForm.blockClass }>
         { 'Environment variables' }
+        <button onClick={ () => { this.addNew(); } }>Add</button>
         { this.renderEnvVars() }
       </div>
     );

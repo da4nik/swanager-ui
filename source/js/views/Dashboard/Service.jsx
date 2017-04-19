@@ -24,6 +24,7 @@ class Service extends React.Component {
     super();
     this.state = {
       editing: false,
+      detailed: false,
     };
   }
 
@@ -65,6 +66,54 @@ class Service extends React.Component {
       null;
   }
 
+  renderDescription() {
+    const { detailed } = this.state;
+    const { service } = this.props;
+    let ports = null;
+    let volumes = null;
+    let variables = null;
+
+    if (detailed) {
+      variables = service.env.length > 0 ?
+        service.env.map((variable) => {
+          return (<p className='service__detail_value'>{ variable.name } = { variable.value }</p>);
+        }) : (<p className='service__detail_value'>None</p>);
+
+      ports = service.published_ports.length > 0 ?
+        service.published_ports.map((port) => {
+          return (<p className='service__detail_value'>[{ port.protocol }] { port.internal } {' => '} { port.external }</p>);
+        }) : (<p className='service__detail_value'>None</p>);
+
+      volumes = service.volumes.length > 0 ?
+        service.volumes.map((volume) => {
+          return (<p className='service__detail_value'>{ volume }</p>);
+        }) : (<p className='service__detail_value'>None</p>);
+    }
+
+    return (
+      <div>
+        <ul className='service__description'>
+          <li>URL for links: { service.ns_name }</li>
+          <li>Image: { service.image }</li>
+          <li>Replicas: { service.replicas }</li>
+          {detailed ? (
+            <div className='service__details'>
+              <li>Variables: { variables }</li>
+              <li>Ports: { ports }</li>
+              <li>Volumes: { volumes }</li>
+            </div>
+          ) : (null)}
+        </ul>
+        <button
+          className='service__details_trigger'
+          onClick={ () => { this.setState({ detailed: !detailed }); } }
+        >
+          { detailed ? 'Show less' : 'Show more' }
+        </button>
+      </div>
+    );
+  }
+
   render() {
     const { service, applyAction } = this.props;
     return (
@@ -89,13 +138,7 @@ class Service extends React.Component {
           >Remove</button>
         </div>
         { this.renderForm() }
-        <div className='service__description'>
-          <ul>
-            <li>Image: { service.image }</li>
-            <li>URL for links: { service.ns_name }</li>
-            <li>Replicas: { service.replicas }</li>
-          </ul>
-        </div>
+        { this.renderDescription() }
         <div className='service_status'>
           <div className='service_status__title'>Status:</div>
           { this.renderStatus() }
