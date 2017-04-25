@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { saveService } from '../../actions/services';
 import EnvVarsForm from './EnvVarsForm';
 import PublishedPortsForm from './PublishedPortsForm';
-import StringArrayForm from '../../components/Global/StringArrayForm';
+import VolumesForm from './VolumesForm';
 
 const mapDispatchToProps = dispatch => ({
   saveServ: (service) => { dispatch(saveService(service)); },
@@ -110,10 +110,9 @@ class ServiceForm extends React.Component {
           onPortsChanged={ (ports) => { this.onPortsChanged(ports); } }
         />
 
-        <StringArrayForm
-          title='Paths to store'
-          entities={ service.volumes || [] }
-          saveEntities={ (volumes) => { this.onVolumesChanged(volumes); } }
+        <VolumesForm
+          volumes={ this.state.volumes }
+          onVolumesChanged={ (volumes) => { this.onVolumesChanged(volumes); } }
         />
 
         <button className='service-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
