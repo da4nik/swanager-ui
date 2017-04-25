@@ -97,6 +97,7 @@ class Service extends React.Component {
         <ul className='service__description'>
           <li>URL for links: { service.ns_name }</li>
           <li>Image: { service.image }</li>
+          { service.command.length > 0 ? <li>Command: { service.command }</li> : null }
           <li>Replicas: { service.replicas }</li>
           {detailed ? (
             <div className='service__details'>

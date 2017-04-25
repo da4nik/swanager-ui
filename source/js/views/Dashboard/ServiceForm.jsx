@@ -39,6 +39,7 @@ class ServiceForm extends React.Component {
       application_id: service.application_id || app.id,
       name: this.nameInput.value,
       image: this.imageInput.value,
+      command: this.commandInput.value,
       replicas: parseInt(this.replicasInput.value, 10),
       env: vars,
       published_ports: ports,
@@ -82,6 +83,16 @@ class ServiceForm extends React.Component {
             type='text'
             ref={ (input) => { this.imageInput = input; } }
             defaultValue={ service.image }
+          />
+        </label>
+
+        <label htmlFor='command' className='service-form__label'>
+          {' Command: '}
+          <input
+            className='service-form__input'
+            type='text'
+            ref={ (input) => { this.commandInput = input; } }
+            defaultValue={ service.command }
           />
         </label>
 
