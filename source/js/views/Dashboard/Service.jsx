@@ -86,7 +86,9 @@ class Service extends React.Component {
 
       volumes = service.volumes.length > 0 ?
         service.volumes.map((volume) => {
-          return (<p className='service__detail_value'>{ volume }</p>);
+          return (
+            <p className='service__detail_value'>{ volume.service }{ `-> ${ volume.backend }` }</p>
+          );
         }) : (<p className='service__detail_value'>None</p>);
     }
 
