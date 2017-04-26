@@ -7,6 +7,8 @@ import ApplicationForm from './ApplicationForm';
 import { applyAppAction, destroyApplication } from '../../actions/apps';
 import API from '../../api';
 
+import { confirm } from '../../components/Confirm/confirm';
+
 const mapStoreToProps = ({ services }) => ({ services });
 
 const mapDispatchToProps = dispatch => ({
@@ -58,11 +60,11 @@ class Application extends React.Component {
         <div className='application__buttons-container'>
           <button
             className='application__button'
-            onClick={ () => { applyAction(app, API.appActions.START); } }
+            onClick={ () => { confirm('Are you sure?').then(() => { applyAction(app, API.appActions.START); }); } }
           >Start</button>
           <button
             className='application__button'
-            onClick={ () => { applyAction(app, API.appActions.STOP); } }
+            onClick={ () => { confirm('Are you sure?').then(() => { applyAction(app, API.appActions.STOP); }); } }
           >Stop</button>
           <button
             className='application__button application__button_left-spaced'
@@ -70,7 +72,7 @@ class Application extends React.Component {
           >Edit</button>
           <button
             className='application__button'
-            onClick={ () => { destroyApp(app); } }
+            onClick={ () => { confirm('Are you sure?').then(() => { applyAction(app, API.appActions.STOP); }); } }
           >Remove</button>
         </div>
         { this.renderEditForm() }
