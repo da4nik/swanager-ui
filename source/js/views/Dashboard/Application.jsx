@@ -7,7 +7,7 @@ import ApplicationForm from './ApplicationForm';
 import { applyAppAction, destroyApplication } from '../../actions/apps';
 import API from '../../api';
 
-import { confirm } from '../../components/Confirm/confirm';
+import confirm from '../../components/Confirm/confirm';
 
 const mapStoreToProps = ({ services }) => ({ services });
 

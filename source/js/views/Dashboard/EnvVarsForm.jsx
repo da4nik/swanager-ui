@@ -8,6 +8,7 @@ class EnvVarsForm extends React.Component {
   static propTypes = {
     vars: PropTypes.array,
     onVarsChanged: PropTypes.func.isRequired,
+    nsName: PropTypes.string,
   }
 
   constructor(props) {
@@ -21,7 +22,10 @@ class EnvVarsForm extends React.Component {
         vars[guidGenerator()] = variable;
       });
     }
-    this.state = { vars };
+    this.state = { 
+      vars,
+      nsNames: props.nsName,
+    };
   }
 
   onNameChange(event, key) {
@@ -53,8 +57,15 @@ class EnvVarsForm extends React.Component {
     this.setState({ vars });
   }
 
+  onShowHintsClick(event, key) {
+    console.log('Hint Clicked');
+    console.log(event);
+    console.log(key);
+  }
+
   renderEnvVars() {
-    const { vars } = this.state;
+    const { vars, nsNames } = this.state;
+    console.log(nsNames);
     return Object.keys(vars).map((key) => {
       const variable = vars[key];
       return (
@@ -72,6 +83,14 @@ class EnvVarsForm extends React.Component {
             onChange={ (event) => { this.onValueChange(event, key); } }
             defaultValue={ variable.value }
           />
+          <div className="showHints">
+            <span className="showHints__circle" onClick={(event) => { this.onShowHintsClick(event, key); }}></span>
+            <div className="hintsWrap">
+              {
+                <div className="hintsWrap__hint">{ nsNames }</div>
+              }
+            </div>
+          </div>
         </div>
       );
     });

@@ -76,6 +76,7 @@ class ServiceForm extends React.Component {
 
   render() {
     const { service } = this.props;
+    console.log(service);
     return (
       <div className='service-form'>
         <div className='service-form__title'>{'Service form'}</div>
@@ -129,6 +130,7 @@ class ServiceForm extends React.Component {
 
         <EnvVarsForm
           vars={ this.state.vars }
+          nsName={ service.ns_name }
           onVarsChanged={ (vars) => { this.onVarsChanged(vars); } }
         />
 
