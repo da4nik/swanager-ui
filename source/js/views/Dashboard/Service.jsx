@@ -6,7 +6,7 @@ import ServiceStatus from './ServiceStatus';
 import { deleteService, applyServiceAction } from '../../actions/services';
 import API from '../../api';
 
-import { confirm } from '../../components/Confirm/confirm';
+import confirm from '../../components/Confirm/confirm';
 
 const mapDispatchToProps = (dispatch) => ({
   removeServ: (service) => { dispatch(deleteService(service)); },
