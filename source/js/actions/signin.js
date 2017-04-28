@@ -1,5 +1,6 @@
 import API from '../api';
 import { SIGNED_IN, ERROR_SIGINIG_IN, SAVE_CURRENT_PATH, UNAUTHORIZED, SIGN_IN_RESET, SIGN_IN_ERROR } from './index';
+import { setCurrentUser, removeCurrentUser } from './currentUser';
 
 export const signinLoaded = () => ({ type: SIGN_IN_RESET });
 export const signinSetError = (error) => ({ type: SIGN_IN_ERROR, data: error });
@@ -25,10 +26,12 @@ export const signin = (email, password) => {
       switch (responseCode) {
         case 401:
           dispatch(errorSigningIn(payload.errors));
+          dispatch(removeCurrentUser());
           break;
         case 200:
           dispatch(signedIn(payload.token));
           dispatch(saveTokenToLocalstore(payload.token));
+          dispatch(setCurrentUser(payload.token.user));
           break;
         default:
           dispatch(errorSigningIn('Unknown error'));
@@ -42,6 +45,6 @@ export const signin = (email, password) => {
 
 export const signout = () => {
   localStorage.removeItem('authToken');
+  localStorage.removeItem('currentUser');
   return { type: UNAUTHORIZED, data: null };
 };
-
