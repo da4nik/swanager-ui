@@ -14,7 +14,8 @@ export default function reducer(state = initialState, action = {}) {
     case SIGNED_IN:
       return state.set('authToken', action.data.token);
     case ERROR_SIGINIG_IN:
-      return state.set('authToken', '').set('errors', action.data);
+      return state.set('authToken', '')
+                  .set('errors', action.data);
     case SAVE_CURRENT_PATH:
       return state.set('redirectPath', action.data);
     case UNAUTHORIZED:

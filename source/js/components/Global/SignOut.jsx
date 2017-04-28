@@ -3,19 +3,29 @@ import { connect } from 'react-redux';
 import { signout } from '../../actions/signin';
 
 const mapDispatchToProps = dispatch => ({
-  signout: () => dispatch(signout()),
+  onSignout: () => dispatch(signout()),
 });
 
-@connect(null, mapDispatchToProps)
+const mapStoreToProps = ({ currentUser }) => ({ currentUser });
+
+@connect(mapStoreToProps, mapDispatchToProps)
 export default class SignOut extends Component {
   static propTypes = {
-    signout: PropTypes.func,
+    onSignout: PropTypes.func,
+    currentUser: PropTypes.object,
   }
 
   render() {
-    return (
-      <button type='submit' className='sign-out' onClick={ () => { this.props.signout(); } }>Sign Out</button>
+    const { onSignout, currentUser } = this.props;
+    return (<div>
+      { currentUser.get('email') }
+      <button
+        type='submit'
+        className='sign-out'
+        onClick={ () => { onSignout(); } }
+      >{ 'Sign Out' }
+      </button>
+    </div>
     );
   }
 }
-
