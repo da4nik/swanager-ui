@@ -15,6 +15,7 @@ class ServiceForm extends React.Component {
   static propTypes = {
     app: PropTypes.object,
     service: PropTypes.object,
+    nsNames: PropTypes.array,
     saveServ: PropTypes.func,
     closeForm: PropTypes.func,
   }
@@ -75,8 +76,7 @@ class ServiceForm extends React.Component {
   }
 
   render() {
-    const { service } = this.props;
-    console.log(service);
+    const { service, nsNames } = this.props;
     return (
       <div className='service-form'>
         <div className='service-form__title'>{'Service form'}</div>
@@ -130,7 +130,7 @@ class ServiceForm extends React.Component {
 
         <EnvVarsForm
           vars={ this.state.vars }
-          nsName={ service.ns_name }
+          nsNames={ nsNames }
           onVarsChanged={ (vars) => { this.onVarsChanged(vars); } }
         />
 
