@@ -48,3 +48,4 @@ export const signout = () => {
   localStorage.removeItem('currentUser');
   return { type: UNAUTHORIZED, data: null };
 };
+

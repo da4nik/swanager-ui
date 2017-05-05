@@ -22,7 +22,7 @@ class EnvVarsForm extends React.Component {
         vars[guidGenerator()] = variable;
       });
     }
-    this.state = { 
+    this.state = {
       vars
     };
   }
