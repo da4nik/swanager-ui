@@ -64,6 +64,8 @@ class EnvVarsForm extends React.Component {
 
   onHintSelect(nsName, key) {
     this.updateVariable(key, { value: nsName });
+    this.updateVariable(key, { showHints: false });
+
   }
 
   renderEnvVars() {
