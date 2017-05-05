@@ -7,3 +7,4 @@ _nogit
 .idea/
 *.swp
 config/development.js
+config/production.js
