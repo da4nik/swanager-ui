@@ -20,11 +20,20 @@ class ApplicationForm extends React.Component {
 
     this.state = {
       name: props.app.name || '',
+      defaultName: props.app.name || '',
+      appHasChanges: false,
     };
   }
 
   onNameChange(event) {
+    const { defaultName } = this.state;
+
     this.setState({ name: event.target.value });
+    if (defaultName !== event.target.value) {
+      this.setState({ appHasChanges: true });
+    } else {
+      this.setState({ appHasChanges: false });
+    }
   }
 
   onSave() {
@@ -49,7 +58,7 @@ class ApplicationForm extends React.Component {
           />
         </label>
 
-        <button className='app-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='app-form__submit' disabled={!this.state.appHasChanges} onClick={ () => { this.onSave(); } }>Save</button>
       </section>
     );
   }
