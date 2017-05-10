@@ -3,3 +3,40 @@
     display: block;
   }
 }
+
+.env-vars-form {
+    display: block;
+    position: relative;
+    &__input-group {
+        display: block;
+        position: relative;
+    }
+}
+
+.showHints {
+    display: inline-block;
+    &__circle {
+        display: block;
+        position: relative;
+        width: 10px;
+        height: 10px;
+        border-radius:10px;
+        margin-left: 5px;
+        cursor: pointer;
+        background-color: #969696;
+    }
+}
+
+.hintsWrap {
+    position: absolute;
+    top: 0;
+    margin-left: 20px;
+    &__hint {
+        display: block;
+        position: relative;
+        white-space: nowrap;
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+}
+

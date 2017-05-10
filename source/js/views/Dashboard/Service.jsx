@@ -16,6 +16,7 @@ class Service extends React.Component {
   static propTypes = {
     service: PropTypes.object,
     app: PropTypes.object,
+    nsNames: PropTypes.array,
     removeServ: PropTypes.func,
     applyAction: PropTypes.func,
   }
@@ -42,11 +43,11 @@ class Service extends React.Component {
   }
 
   renderForm() {
-    const { service, app } = this.props;
+    const { service, app, nsNames } = this.props;
     if (this.state.editing) {
       return (
         <div className='service__form'>
-          <ServiceForm service={ service } app={ app } closeForm={ () => { this.closeForm(); } } />
+          <ServiceForm service={ service } app={ app } nsNames={ nsNames } closeForm={ () => { this.closeForm(); } } />
         </div>
       );
     }

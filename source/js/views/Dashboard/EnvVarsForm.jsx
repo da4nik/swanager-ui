@@ -8,13 +8,14 @@ class EnvVarsForm extends React.Component {
   static propTypes = {
     vars: PropTypes.array,
     onVarsChanged: PropTypes.func.isRequired,
+    nsNames: PropTypes.array,
   }
 
   constructor(props) {
     super(props);
     const vars = {};
 
-    vars[guidGenerator()] = { name: '', value: '' };
+    vars[guidGenerator()] = { name: '', value: '', showHints: false };
 
     if (props.vars && props.vars.length > 0) {
       props.vars.forEach((variable) => {
@@ -49,12 +50,24 @@ class EnvVarsForm extends React.Component {
 
   addNew() {
     const { vars } = this.state;
-    vars[guidGenerator()] = { name: '', value: '' };
+    vars[guidGenerator()] = { name: '', value: '', showHints: false };
     this.setState({ vars });
+  }
+
+  onShowHintsClick(key) {
+    const { vars } = this.state;
+    const currentHintState = vars[key].showHints;
+    this.updateVariable(key, { showHints: !currentHintState });
+  }
+
+  onHintSelect(nsName, key) {
+    this.updateVariable(key, { value: nsName });
+    this.updateVariable(key, { showHints: false });
   }
 
   renderEnvVars() {
     const { vars } = this.state;
+    const { nsNames } = this.props;
     return Object.keys(vars).map((key) => {
       const variable = vars[key];
       return (
@@ -70,8 +83,23 @@ class EnvVarsForm extends React.Component {
             className={ this.elemClass('input') }
             type='text'
             onChange={ (event) => { this.onValueChange(event, key); } }
-            defaultValue={ variable.value }
+            value={ variable.value }
           />
+          <div className="showHints" >
+            <span className="showHints__circle" onClick={(event) => { this.onShowHintsClick(key); }}></span>
+            <div className="hintsWrap">
+              { 
+                variable.showHints ?
+                  nsNames.map((nsName) => {
+                    return (
+                      <div key={ nsName } className="hintsWrap__hint" onClick={(event) => { this.onHintSelect(nsName, key); }}>{ nsName }</div>
+                    )
+                  })
+                :
+                  null
+              }
+            </div>
+          </div>
         </div>
       );
     });
