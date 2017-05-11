@@ -29,14 +29,6 @@ class ServiceForm extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.state.serviceHasChanges !== true ) {
-      return true;
-    }
-
-    return this.props !== nextProps;
-  }
-
   onSave() {
     const { service, app, saveServ, closeForm } = this.props;
     const { vars, ports, volumes } = this.state;
