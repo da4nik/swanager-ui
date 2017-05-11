@@ -58,11 +58,11 @@ class Application extends React.Component {
         <div className='application__buttons-container'>
           <button
             className='application__button'
-            onClick={ () => { applyAction(app, API.appActions.START); } }
+            onClick={ () => { if(confirm('Are you sure?')){ applyAction(app, API.appActions.START); } } }
           >Start</button>
           <button
             className='application__button'
-            onClick={ () => { applyAction(app, API.appActions.STOP); } }
+            onClick={ () => { if(confirm('Are you sure?')){ applyAction(app, API.appActions.STOP); } } }
           >Stop</button>
           <button
             className='application__button application__button_left-spaced'
@@ -70,7 +70,7 @@ class Application extends React.Component {
           >Edit</button>
           <button
             className='application__button'
-            onClick={ () => { destroyApp(app); } }
+            onClick={ () => { if(confirm('Are you sure?')){ destroyApp(app); } } }
           >Remove</button>
         </div>
         { this.renderEditForm() }
