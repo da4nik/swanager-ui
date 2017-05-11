@@ -20,20 +20,12 @@ class ApplicationForm extends React.Component {
 
     this.state = {
       name: props.app.name || '',
-      defaultName: props.app.name || '',
       appHasChanges: false,
     };
   }
 
   onNameChange(event) {
-    const { defaultName } = this.state;
-
-    this.setState({ name: event.target.value });
-    if (defaultName !== event.target.value) {
-      this.setState({ appHasChanges: true });
-    } else {
-      this.setState({ appHasChanges: false });
-    }
+    this.setState({ name: event.target.value, appHasChanges: true });
   }
 
   onSave() {

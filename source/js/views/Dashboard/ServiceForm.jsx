@@ -55,18 +55,15 @@ class ServiceForm extends React.Component {
   }
 
   onVarsChanged(vars) {
-    this.setState({ vars });
-    this.setState({ serviceHasChanges: true });
+    this.setState({ vars, serviceHasChanges: true });
   }
 
   onPortsChanged(ports) {
-    this.setState({ ports });
-    this.setState({ serviceHasChanges: true });
+    this.setState({ ports, serviceHasChanges: true });
   }
 
   onVolumesChanged(volumes) {
-    this.setState({ volumes });
-    this.setState({ serviceHasChanges: true });
+    this.setState({ volumes, serviceHasChanges: true });
   }
 
   onInputChange(event) {
@@ -75,7 +72,6 @@ class ServiceForm extends React.Component {
 
   render() {
     const { service } = this.props;
-    console.log('sdsads');
     return (
       <div className='service-form'>
         <div className='service-form__title'>{'Service form'}</div>
