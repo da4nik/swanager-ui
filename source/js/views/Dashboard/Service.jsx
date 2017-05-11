@@ -6,8 +6,6 @@ import ServiceStatus from './ServiceStatus';
 import { deleteService, applyServiceAction } from '../../actions/services';
 import API from '../../api';
 
-import confirm from '../../components/Confirm/confirm';
-
 const mapDispatchToProps = (dispatch) => ({
   removeServ: (service) => { dispatch(deleteService(service)); },
   applyAction: (service, action) => { dispatch(applyServiceAction(service, action)); },
@@ -127,11 +125,11 @@ class Service extends React.Component {
         <div className='service__buttons'>
           <button
             className='service__button'
-            onClick={ () => { confirm('Are you sure?').then(() => { applyAction(service, API.serviceActions.START); }); } }
+            onClick={ () => { if(confirm('Are you sure?')){ applyAction(service, API.serviceActions.START); } } }
           >Start</button>
           <button
             className='service__button'
-            onClick={ () => { confirm('Are you sure?').then(() => { applyAction(service, API.serviceActions.STOP); }); } }
+            onClick={ () => { if(confirm('Are you sure?')){ applyAction(service, API.serviceActions.STOP); } } }
           >Stop</button>
           <button
             className='service__button'
@@ -139,7 +137,7 @@ class Service extends React.Component {
           >Edit</button>
           <button
             className='service__button'
-            onClick={ () => { confirm('Are you sure?').then(() => { this.onRemove(); }); } }
+            onClick={ () => { if(confirm('Are you sure?')){ this.onRemove(); } } }
           >Remove</button>
         </div>
         { this.renderForm() }
