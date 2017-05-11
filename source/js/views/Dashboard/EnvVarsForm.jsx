@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import { guidGenerator } from '../../lib';
+import Hints from '../../components/Hints/hints';
 
 class EnvVarsForm extends React.Component {
   static blockClass = 'env-vars-form';
@@ -85,21 +86,7 @@ class EnvVarsForm extends React.Component {
             onChange={ (event) => { this.onValueChange(event, key); } }
             value={ variable.value }
           />
-          <div className="showHints" >
-            <span className="showHints__circle" onClick={(event) => { this.onShowHintsClick(key); }}></span>
-            <div className="hintsWrap">
-              { 
-                variable.showHints ?
-                  nsNames.map((nsName) => {
-                    return (
-                      <div key={ nsName } className="hintsWrap__hint" onClick={(event) => { this.onHintSelect(nsName, key); }}>{ nsName }</div>
-                    )
-                  })
-                :
-                  null
-              }
-            </div>
-          </div>
+          <Hints Hintskey={ key } showHints={ variable.showHints } nsNames={ nsNames } onShowHints={ (key) => { this.onShowHintsClick(key); } } onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } } />
         </div>
       );
     });
