@@ -25,7 +25,7 @@ class ApplicationForm extends React.Component {
   }
 
   onNameChange(event) {
-    this.setState({ name: event.target.value, appHasChanges: true });
+    this.setState({ name: event.target.value, appHasChanges: (this.props.app.name !== event.target.value) });
   }
 
   onSave() {

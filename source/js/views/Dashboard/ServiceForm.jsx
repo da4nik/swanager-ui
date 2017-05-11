@@ -51,6 +51,7 @@ class ServiceForm extends React.Component {
       volumes,
     };
     saveServ(Object.assign({}, service, updatedService));
+    this.setState({ serviceHasChanges: false });
     closeForm();
   }
 
