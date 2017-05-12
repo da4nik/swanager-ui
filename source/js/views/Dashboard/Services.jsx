@@ -28,17 +28,10 @@ class Services extends React.Component {
   renderServices() {
     const { services, app } = this.props;
 
-    const nsNames = new Array();
-
-    services.map((service) => {
-      nsNames.push(service.ns_name);
-      return service.ns_name;
-    });
-
     const renderedServices = services.valueSeq()
       .filter(service => service.application_id === app.id)
       .map((service) => {
-        return (<Service key={ service.id } service={ service } app={ app } nsNames = { nsNames } />);
+        return (<Service key={ service.id } service={ service } app={ app } />);
       }).toJS();
 
     if (renderedServices.length === 0) {
