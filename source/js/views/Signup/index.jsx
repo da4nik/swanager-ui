@@ -10,7 +10,8 @@ import { ROUTE_SIGN_IN } from '../../routes';
 const mapDispatchToProps = dispatch => ({
   resetSignup: () => dispatch(resetSignup()),
   signupSetError: (error) => dispatch(signupSetError(error)),
-  signup: (email, password, passwordConfirmation) => dispatch(doSignup(email, password, passwordConfirmation)),
+  signup: (email, password, passwordConfirmation) =>
+    dispatch(doSignup(email, password, passwordConfirmation)),
 });
 
 const mapStoreToProps = ({ signup, auth }, { router }) => {
@@ -132,4 +133,3 @@ class Signup extends React.Component {
 }
 
 export default Signup;
-
