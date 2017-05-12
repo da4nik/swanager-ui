@@ -9,7 +9,6 @@ class EnvVarsForm extends React.Component {
   static propTypes = {
     vars: PropTypes.array,
     onVarsChanged: PropTypes.func.isRequired,
-    nsNames: PropTypes.array,
   }
 
   constructor(props) {
@@ -68,7 +67,6 @@ class EnvVarsForm extends React.Component {
 
   renderEnvVars() {
     const { vars } = this.state;
-    const { nsNames } = this.props;
     return Object.keys(vars).map((key) => {
       const variable = vars[key];
       return (
@@ -86,7 +84,7 @@ class EnvVarsForm extends React.Component {
             onChange={ (event) => { this.onValueChange(event, key); } }
             value={ variable.value }
           />
-          <Hints Hintskey={ key } showHints={ variable.showHints } nsNames={ nsNames } onShowHints={ (key) => { this.onShowHintsClick(key); } } onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } } />
+          <Hints Hintskey={ key } showHints={ variable.showHints } onShowHints={ (key) => { this.onShowHintsClick(key); } } onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } } />
         </div>
       );
     });
