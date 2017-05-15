@@ -25,11 +25,8 @@ class ServiceForm extends React.Component {
       vars: props.service.env,
       ports: props.service.published_ports,
       volumes: props.service.volumes,
+      serviceHasChanges: false,
     };
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   onSave() {
@@ -46,19 +43,24 @@ class ServiceForm extends React.Component {
       volumes,
     };
     saveServ(Object.assign({}, service, updatedService));
+    this.setState({ serviceHasChanges: false });
     closeForm();
   }
 
   onVarsChanged(vars) {
-    this.setState({ vars });
+    this.setState({ vars, serviceHasChanges: true });
   }
 
   onPortsChanged(ports) {
-    this.setState({ ports });
+    this.setState({ ports, serviceHasChanges: true });
   }
 
   onVolumesChanged(volumes) {
-    this.setState({ volumes });
+    this.setState({ volumes, serviceHasChanges: true });
+  }
+
+  onInputChange(event) {
+    this.setState({ serviceHasChanges: true });
   }
 
   render() {
@@ -72,6 +74,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.nameInput = input; } }
+            onChange={ (event) => { this.onInputChange(event); } }
             defaultValue={ service.name }
           />
         </label>
@@ -82,6 +85,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.imageInput = input; } }
+            onChange={ (event) => { this.onInputChange(event); } }
             defaultValue={ service.image }
           />
         </label>
@@ -92,6 +96,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.commandInput = input; } }
+            onChange={ (event) => { this.onInputChange(event); } }
             defaultValue={ service.command }
           />
         </label>
@@ -126,7 +131,7 @@ class ServiceForm extends React.Component {
           onVolumesChanged={ (volumes) => { this.onVolumesChanged(volumes); } }
         />
 
-        <button className='service-form__submit' onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='service-form__submit' disabled={!this.state.serviceHasChanges} onClick={ () => { this.onSave(); } }>Save</button>
       </div>
     );
   }
