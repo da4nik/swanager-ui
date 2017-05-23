@@ -34,12 +34,9 @@ class Hints extends React.Component {
   render() {
     const { appID, services, Hintskey, showHints, onShowHints, onHintSelect } = this.props;
 
-    const nsNames = [];
-
-    services.filter(service => service.application_id === appID).map((service) => {
-      nsNames.push(service.ns_name);
+    const nsNames = services.filter(service => service.application_id === appID).map((service) => {
       return service.ns_name;
-    });
+    }).toJS();
 
     return (
       <div className='showHints'>
@@ -47,9 +44,9 @@ class Hints extends React.Component {
         <div className='hintsWrap' style={ { display: showHints ? 'block' : 'none' } }>
           {
             showHints ?
-              nsNames.map((nsName) => {
+              Object.keys(nsNames).map((nsName) => {
                 return (
-                  <div key={ nsName } className='hintsWrap__hint' onClick={ () => { onHintSelect(nsName, Hintskey); } }>{ nsName }</div>
+                  <div key={ nsNames[nsName] } className='hintsWrap__hint' onClick={ () => { onHintSelect(nsNames[nsName], Hintskey); } }>{ nsNames[nsName] }</div>
                 );
               })
             :
