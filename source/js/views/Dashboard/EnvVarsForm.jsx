@@ -8,6 +8,7 @@ class EnvVarsForm extends React.Component {
 
   static propTypes = {
     vars: PropTypes.array,
+    appID: PropTypes.string,
     onVarsChanged: PropTypes.func.isRequired,
   }
 
@@ -33,17 +34,6 @@ class EnvVarsForm extends React.Component {
     this.updateVariable(key, { value: event.target.value });
   }
 
-  elemClass(element) {
-    return `${ EnvVarsForm.blockClass }__${ element }`;
-  }
-
-  updateVariable(key, elem) {
-    const { vars } = this.state;
-    this.state.vars[key] = Object.assign(vars[key], elem);
-    this.props.onVarsChanged(this.varsToJSObject(this.state.vars));
-    this.setState({ vars: this.state.vars });
-  }
-
   varsToJSObject(vars) {
     return Object.values(vars).map((value) => value);
   }
@@ -54,10 +44,24 @@ class EnvVarsForm extends React.Component {
     this.setState({ vars });
   }
 
+  onCloseHintsClick() {
+    const { vars } = this.state;
+
+    Object.keys(vars).map((variable) => {
+      this.updateVariable(variable, { showHints: false });
+    });
+  }
+
   onShowHintsClick(key) {
     const { vars } = this.state;
     const currentHintState = vars[key].showHints;
-    this.updateVariable(key, { showHints: !currentHintState });
+    Object.keys(vars).map((variable) => {
+      if (variable !== key) {
+        this.updateVariable(variable, { showHints: false });
+      } else {
+        this.updateVariable(key, { showHints: !currentHintState });
+      }
+    });
   }
 
   onHintSelect(nsName, key) {
@@ -65,8 +69,20 @@ class EnvVarsForm extends React.Component {
     this.updateVariable(key, { showHints: false });
   }
 
+  updateVariable(key, elem) {
+    const { vars } = this.state;
+    this.state.vars[key] = Object.assign(vars[key], elem);
+    this.props.onVarsChanged(this.varsToJSObject(this.state.vars));
+    this.setState({ vars: this.state.vars });
+  }
+
+  elemClass(element) {
+    return `${ EnvVarsForm.blockClass }__${ element }`;
+  }
+
   renderEnvVars() {
     const { vars } = this.state;
+    const { appID } = this.props;
     return Object.keys(vars).map((key) => {
       const variable = vars[key];
       return (
@@ -84,7 +100,14 @@ class EnvVarsForm extends React.Component {
             onChange={ (event) => { this.onValueChange(event, key); } }
             value={ variable.value }
           />
-          <Hints Hintskey={ key } showHints={ variable.showHints } onShowHints={ (key) => { this.onShowHintsClick(key); } } onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } } />
+          <Hints
+            Hintskey={ key }
+            showHints={ variable.showHints }
+            appID={ appID }
+            onShowHints={ (key) => { this.onShowHintsClick(key); } }
+            onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } }
+            onCloseHints={ () => { this.onCloseHintsClick(); } }
+          />
         </div>
       );
     });

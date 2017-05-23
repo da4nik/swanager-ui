@@ -32,12 +32,17 @@
     top: 0;
     margin-left: 20px;
     z-index: 1;
+    border: 1px solid #000000;
     &__hint {
         display: block;
         position: relative;
         white-space: nowrap;
         background-color: #ffffff;
         cursor: pointer;
+        padding: 3px;
+    };
+    &__hint:hover {
+        background-color:gray
     }
 }
 
