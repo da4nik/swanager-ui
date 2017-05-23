@@ -17,6 +17,7 @@ export const doSignup = (email, password, passwordConfirmation) => {
     .then(payload => {
       switch (responseCode) {
         case 400:
+        case 422:
           dispatch(signupError(payload.errors));
           break;
         case 201:
@@ -31,4 +32,3 @@ export const doSignup = (email, password, passwordConfirmation) => {
     });
   };
 };
-
