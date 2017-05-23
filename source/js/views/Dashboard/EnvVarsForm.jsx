@@ -34,21 +34,12 @@ class EnvVarsForm extends React.Component {
     this.updateVariable(key, { value: event.target.value });
   }
 
-  varsToJSObject(vars) {
-    return Object.values(vars).map((value) => value);
-  }
-
-  addNew() {
-    const { vars } = this.state;
-    vars[guidGenerator()] = { name: '', value: '', showHints: false };
-    this.setState({ vars });
-  }
-
   onCloseHintsClick() {
     const { vars } = this.state;
 
     Object.keys(vars).map((variable) => {
       this.updateVariable(variable, { showHints: false });
+      return false;
     });
   }
 
@@ -61,12 +52,23 @@ class EnvVarsForm extends React.Component {
       } else {
         this.updateVariable(key, { showHints: !currentHintState });
       }
+      return false;
     });
   }
 
   onHintSelect(nsName, key) {
     this.updateVariable(key, { value: nsName });
     this.updateVariable(key, { showHints: false });
+  }
+
+  addNew() {
+    const { vars } = this.state;
+    vars[guidGenerator()] = { name: '', value: '', showHints: false };
+    this.setState({ vars });
+  }
+
+  varsToJSObject(vars) {
+    return Object.values(vars).map((value) => value);
   }
 
   updateVariable(key, elem) {

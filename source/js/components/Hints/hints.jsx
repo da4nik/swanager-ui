@@ -24,11 +24,9 @@ class Hints extends React.Component {
     const { onCloseHints } = this.props;
 
     event.stopPropagation();
-    if (event.target.className !== 'showHints__circle') {
-      onCloseHints();
-    } else {
-      return false;
-    }
+    if (event.target.className !== 'showHints__circle') { onCloseHints(); }
+
+    return false;
   }
 
   render() {

@@ -59,7 +59,7 @@ class ServiceForm extends React.Component {
     this.setState({ volumes, serviceHasChanges: true });
   }
 
-  onInputChange(event) {
+  onInputChange() {
     this.setState({ serviceHasChanges: true });
   }
 
@@ -74,7 +74,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.nameInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.name }
           />
         </label>
@@ -85,7 +85,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.imageInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.image }
           />
         </label>
@@ -96,7 +96,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.commandInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.command }
           />
         </label>
@@ -132,7 +132,7 @@ class ServiceForm extends React.Component {
           onVolumesChanged={ (volumes) => { this.onVolumesChanged(volumes); } }
         />
 
-        <button className='service-form__submit' disabled={!this.state.serviceHasChanges} onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='service-form__submit' disabled={ !this.state.serviceHasChanges } onClick={ () => { this.onSave(); } }>Save</button>
       </div>
     );
   }
