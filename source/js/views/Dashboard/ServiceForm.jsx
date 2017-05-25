@@ -59,12 +59,12 @@ class ServiceForm extends React.Component {
     this.setState({ volumes, serviceHasChanges: true });
   }
 
-  onInputChange(event) {
+  onInputChange() {
     this.setState({ serviceHasChanges: true });
   }
 
   render() {
-    const { service } = this.props;
+    const { service, app } = this.props;
     return (
       <div className='service-form'>
         <div className='service-form__title'>{'Service form'}</div>
@@ -74,7 +74,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.nameInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.name }
           />
         </label>
@@ -85,7 +85,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.imageInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.image }
           />
         </label>
@@ -96,7 +96,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.commandInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.command }
           />
         </label>
@@ -119,6 +119,7 @@ class ServiceForm extends React.Component {
 
         <EnvVarsForm
           vars={ this.state.vars }
+          appID={ app.id }
           onVarsChanged={ (vars) => { this.onVarsChanged(vars); } }
         />
 
@@ -132,7 +133,7 @@ class ServiceForm extends React.Component {
           onVolumesChanged={ (volumes) => { this.onVolumesChanged(volumes); } }
         />
 
-        <button className='service-form__submit' disabled={!this.state.serviceHasChanges} onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='service-form__submit' disabled={ !this.state.serviceHasChanges } onClick={ () => { this.onSave(); } }>Save</button>
       </div>
     );
   }
