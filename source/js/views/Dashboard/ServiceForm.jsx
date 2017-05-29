@@ -59,7 +59,7 @@ class ServiceForm extends React.Component {
     this.setState({ volumes, serviceHasChanges: true });
   }
 
-  onInputChange(event) {
+  onInputChange() {
     this.setState({ serviceHasChanges: true });
   }
 
@@ -132,7 +132,7 @@ class ServiceForm extends React.Component {
           onVolumesChanged={ (volumes) => { this.onVolumesChanged(volumes); } }
         />
 
-        <button className='service-form__submit' disabled={!this.state.serviceHasChanges} onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='service-form__submit' disabled={ !this.state.serviceHasChanges } onClick={ () => { this.onSave(); } }>Save</button>
       </div>
     );
   }
