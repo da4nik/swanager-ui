@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react';
 
 import { guidGenerator } from '../../lib';
-import Hints from '../../components/Hints/hints';
 
 class EnvVarsForm extends React.Component {
   static blockClass = 'env-vars-form';
 
   static propTypes = {
     vars: PropTypes.array,
-    appID: PropTypes.string,
     onVarsChanged: PropTypes.func.isRequired,
   }
 
@@ -16,7 +14,7 @@ class EnvVarsForm extends React.Component {
     super(props);
     const vars = {};
 
-    vars[guidGenerator()] = { name: '', value: '', showHints: false };
+    vars[guidGenerator()] = { name: '', value: '' };
 
     if (props.vars && props.vars.length > 0) {
       props.vars.forEach((variable) => {
@@ -34,41 +32,8 @@ class EnvVarsForm extends React.Component {
     this.updateVariable(key, { value: event.target.value });
   }
 
-  onCloseHintsClick() {
-    const { vars } = this.state;
-
-    Object.keys(vars).map((variable) => {
-      this.updateVariable(variable, { showHints: false });
-      return false;
-    });
-  }
-
-  onShowHintsClick(key) {
-    const { vars } = this.state;
-    const currentHintState = vars[key].showHints;
-    Object.keys(vars).map((variable) => {
-      if (variable !== key) {
-        this.updateVariable(variable, { showHints: false });
-      } else {
-        this.updateVariable(key, { showHints: !currentHintState });
-      }
-      return false;
-    });
-  }
-
-  onHintSelect(nsName, key) {
-    this.updateVariable(key, { value: nsName });
-    this.updateVariable(key, { showHints: false });
-  }
-
-  addNew() {
-    const { vars } = this.state;
-    vars[guidGenerator()] = { name: '', value: '', showHints: false };
-    this.setState({ vars });
-  }
-
-  varsToJSObject(vars) {
-    return Object.values(vars).map((value) => value);
+  elemClass(element) {
+    return `${ EnvVarsForm.blockClass }__${ element }`;
   }
 
   updateVariable(key, elem) {
@@ -78,13 +43,18 @@ class EnvVarsForm extends React.Component {
     this.setState({ vars: this.state.vars });
   }
 
-  elemClass(element) {
-    return `${ EnvVarsForm.blockClass }__${ element }`;
+  varsToJSObject(vars) {
+    return Object.values(vars).map((value) => value);
+  }
+
+  addNew() {
+    const { vars } = this.state;
+    vars[guidGenerator()] = { name: '', value: '' };
+    this.setState({ vars });
   }
 
   renderEnvVars() {
     const { vars } = this.state;
-    const { appID } = this.props;
     return Object.keys(vars).map((key) => {
       const variable = vars[key];
       return (
@@ -100,15 +70,7 @@ class EnvVarsForm extends React.Component {
             className={ this.elemClass('input') }
             type='text'
             onChange={ (event) => { this.onValueChange(event, key); } }
-            value={ variable.value }
-          />
-          <Hints
-            Hintskey={ key }
-            showHints={ variable.showHints }
-            appID={ appID }
-            onShowHints={ (key) => { this.onShowHintsClick(key); } }
-            onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } }
-            onCloseHints={ () => { this.onCloseHintsClick(); } }
+            defaultValue={ variable.value }
           />
         </div>
       );
