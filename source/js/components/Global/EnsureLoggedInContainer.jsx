@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { saveCurrentPath } from '../../actions/signin';
@@ -16,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
-class EnsureLoggedInContainer extends React.Component {
+class EnsureLoggedInContainer extends Component {
   static propTypes = {
     router: PropTypes.object,
     saveRedirectBackPath: PropTypes.func,

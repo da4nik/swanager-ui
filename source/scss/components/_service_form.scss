@@ -16,6 +16,9 @@
 .showHints {
     display: inline-block;
     &__circle {
+        padding: 0;
+        border: 0;
+        outline: none;
         display: block;
         position: relative;
         width: 10px;
@@ -34,6 +37,9 @@
     z-index: 1;
     border: 1px solid #000000;
     &__hint {
+        padding: 0;
+        border: 0;
+        outline: none;
         display: block;
         position: relative;
         white-space: nowrap;

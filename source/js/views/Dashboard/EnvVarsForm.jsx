@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { guidGenerator } from '../../lib';
 import Hints from '../../components/Hints/hints';
 
-class EnvVarsForm extends React.Component {
+class EnvVarsForm extends Component {
   static blockClass = 'env-vars-form';
 
   static propTypes = {
@@ -106,8 +107,8 @@ class EnvVarsForm extends React.Component {
             Hintskey={ key }
             showHints={ variable.showHints }
             appID={ appID }
-            onShowHints={ (key) => { this.onShowHintsClick(key); } }
-            onHintSelect={ (nsName, key) => { this.onHintSelect(nsName, key); } }
+            onShowHints={ (Hintskey) => { this.onShowHintsClick(Hintskey); } }
+            onHintSelect={ (nsName, Hintskey) => { this.onHintSelect(nsName, Hintskey); } }
             onCloseHints={ () => { this.onCloseHintsClick(); } }
           />
         </div>

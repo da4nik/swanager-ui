@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { guidGenerator } from '../../lib';
 
-class PublishedPortsForm extends React.Component {
+class PublishedPortsForm extends Component {
   static blockClass = 'pub-ports-form';
 
   static propTypes = {

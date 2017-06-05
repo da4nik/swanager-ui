@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 
 const mapStoreToProps = ({ services }) => ({ services });
 
 @connect(mapStoreToProps, {})
-class Hints extends React.Component {
+class Hints extends Component {
   static propTypes = {
     appID: PropTypes.string,
     services: PropTypes.instanceOf(Immutable.Map),
@@ -38,13 +39,13 @@ class Hints extends React.Component {
 
     return (
       <div className='showHints'>
-        <span className='showHints__circle' onClick={ () => { onShowHints(Hintskey); } }></span>
+        <button className='showHints__circle' onClick={ () => { onShowHints(Hintskey); } } type='button'>{' '}</button>
         <div className='hintsWrap' style={ { display: showHints ? 'block' : 'none' } }>
           {
             showHints ?
               Object.keys(nsNames).map((nsName) => {
                 return (
-                  <div key={ nsNames[nsName] } className='hintsWrap__hint' onClick={ () => { onHintSelect(nsNames[nsName], Hintskey); } }>{ nsNames[nsName] }</div>
+                  <button key={ nsNames[nsName] } className='hintsWrap__hint' onClick={ () => { onHintSelect(nsNames[nsName], Hintskey); } } type='button'>{ nsNames[nsName] }</button>
                 );
               })
             :

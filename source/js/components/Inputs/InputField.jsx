@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class InputField extends React.Component {
+class InputField extends Component {
   static propTypes = {
-    inputType: React.PropTypes.string,
-    title: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    value: React.PropTypes.string,
-    placeholder: React.PropTypes.string,
-    inputClass: React.PropTypes.string,
+    inputType: PropTypes.string,
+    title: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
+    inputClass: PropTypes.string,
   }
 
   render() {

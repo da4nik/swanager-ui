@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { saveApplication } from '../../actions/apps';
@@ -8,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(null, mapDispatchToProps)
-class ApplicationForm extends React.Component {
+class ApplicationForm extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
     saveApp: PropTypes.func,

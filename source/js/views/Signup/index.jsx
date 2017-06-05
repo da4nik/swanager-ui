@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -25,7 +26,7 @@ const mapStoreToProps = ({ signup, auth }, { router }) => {
 };
 
 @connect(mapStoreToProps, mapDispatchToProps)
-class Signup extends React.Component {
+class Signup extends Component {
 
   static propTypes = {
     resetSignup: PropTypes.func,
@@ -35,8 +36,8 @@ class Signup extends React.Component {
     isLoggedIn: PropTypes.bool,
     router: PropTypes.object,
     errors: PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
+      PropTypes.string,
+      PropTypes.object,
     ]),
   }
 

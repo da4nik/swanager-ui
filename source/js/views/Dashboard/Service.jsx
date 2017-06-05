@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ServiceForm from './ServiceForm';
@@ -12,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 @connect(null, mapDispatchToProps)
-class Service extends React.Component {
+class Service extends Component {
   static propTypes = {
     service: PropTypes.object,
     app: PropTypes.object,

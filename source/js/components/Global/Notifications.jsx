@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import { hideNotification } from '../../actions/notifications';
@@ -12,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(mapStoreToProps, mapDispatchToProps)
-class Notifications extends React.Component {
+class Notifications extends Component {
   static propTypes = {
     notifications: PropTypes.instanceOf(Immutable.Map),
     hideNotif: PropTypes.func,
