@@ -81,7 +81,7 @@ class Service extends React.Component {
 
       ports = service.published_ports.length > 0 ?
         service.published_ports.map((port) => {
-          return (<p className='service__detail_value'>[{ port.protocol }] { port.internal } {' => '} { port.external }</p>);
+          return (<p className='service__detail_value'>[{ port.protocol }] { port.internal } {' => '} { port.external } { ', disabled: '} { port.disabled ? 'true' : 'false' }</p>);
         }) : (<p className='service__detail_value'>None</p>);
 
       volumes = service.volumes.length > 0 ?

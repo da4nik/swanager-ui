@@ -106,6 +106,7 @@ class ServiceForm extends React.Component {
           <select
             className='service-form__input'
             ref={ (input) => { this.replicasInput = input; } }
+            onChange={ (event) => { this.onInputChange(event); } }
             defaultValue={ service.replicas }
           >
             <option>1</option>
