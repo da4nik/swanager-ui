@@ -35,3 +35,5 @@ Example:
     "SWANAGER_WS_URL": "WS_URL"
   }
 }
+
+Using a variable: process.env.myenv.SWANAGER_API_URL
