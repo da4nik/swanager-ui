@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { saveApplication } from '../../actions/apps';
@@ -8,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(null, mapDispatchToProps)
-class ApplicationForm extends React.Component {
+class ApplicationForm extends Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
     saveApp: PropTypes.func,
@@ -25,7 +26,10 @@ class ApplicationForm extends React.Component {
   }
 
   onNameChange(event) {
-    this.setState({ name: event.target.value, appHasChanges: (this.props.app.name !== event.target.value) });
+    this.setState({
+      name: event.target.value,
+      appHasChanges: (this.props.app.name !== event.target.value),
+    });
   }
 
   onSave() {
@@ -50,7 +54,7 @@ class ApplicationForm extends React.Component {
           />
         </label>
 
-        <button className='app-form__submit' disabled={!this.state.appHasChanges} onClick={ () => { this.onSave(); } }>Save</button>
+        <button className='app-form__submit' disabled={ !this.state.appHasChanges } onClick={ () => { this.onSave(); } }>Save</button>
       </section>
     );
   }

@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 
 import Application from './Application';
 import ApplicationForm from './ApplicationForm';
 
-class Applications extends React.Component {
+class Applications extends Component {
   static propTypes = {
     apps: PropTypes.instanceOf(Immutable.Map),
   }

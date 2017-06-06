@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 
@@ -15,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(mapStoreToProps, mapDispatchToProps)
-class Application extends React.Component {
+class Application extends Component {
   static propTypes = {
     app: PropTypes.object,
     services: PropTypes.instanceOf(Immutable.Map),

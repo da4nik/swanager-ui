@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { saveService } from '../../actions/services';
@@ -11,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 @connect(null, mapDispatchToProps)
-class ServiceForm extends React.Component {
+class ServiceForm extends Component {
   static propTypes = {
     app: PropTypes.object,
     service: PropTypes.object,
@@ -64,7 +65,7 @@ class ServiceForm extends React.Component {
   }
 
   render() {
-    const { service } = this.props;
+    const { service, app } = this.props;
     return (
       <div className='service-form'>
         <div className='service-form__title'>{'Service form'}</div>
@@ -74,7 +75,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.nameInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.name }
           />
         </label>
@@ -85,7 +86,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.imageInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.image }
           />
         </label>
@@ -96,7 +97,7 @@ class ServiceForm extends React.Component {
             className='service-form__input'
             type='text'
             ref={ (input) => { this.commandInput = input; } }
-            onChange={ (event) => { this.onInputChange(event); } }
+            onChange={ () => { this.onInputChange(); } }
             defaultValue={ service.command }
           />
         </label>
@@ -119,6 +120,7 @@ class ServiceForm extends React.Component {
 
         <EnvVarsForm
           vars={ this.state.vars }
+          appID={ app.id }
           onVarsChanged={ (vars) => { this.onVarsChanged(vars); } }
         />
 
