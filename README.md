@@ -24,8 +24,14 @@ $ docker run --name swanager-ui -p <host_port>:80 -d swanager-ui:latest
 ```
 ## Env
 
-SWANAGER_API_URL='http://cluster-1.westeurope.cloud.swanager.com:4945/api/v1' SWANAGER_WS_URL='ws://cluster-1.westeurope.cloud.swanager.com:4945/ws' npm start
+1. Create a file env.json
+2. Add an object with the necessary environment variables to a single object "myenv"
 
-export SWANAGER_API_URL='http://cluster-1.westeurope.cloud.swanager.com:4945/api/v1'
-export SWANAGER_WS_URL='ws://cluster-1.westeurope.cloud.swanager.com:4945/ws'
-npm start
+Example: 
+
+{
+  "myenv": {
+    "SWANAGER_API_URL": "API_URL",
+    "SWANAGER_WS_URL": "WS_URL"
+  }
+}
