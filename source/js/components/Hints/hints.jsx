@@ -17,19 +17,6 @@ class Hints extends Component {
     onHintSelect: PropTypes.func,
   }
 
-  componentDidMount() {
-    document.addEventListener('click', () => { this.onClickOutside(event); });
-  }
-
-  onClickOutside(event) {
-    const { onCloseHints } = this.props;
-
-    event.stopPropagation();
-    if (event.target.className !== 'showHints__circle') { onCloseHints(); }
-
-    return false;
-  }
-
   render() {
     const { appID, services, Hintskey, showHints, onShowHints, onHintSelect } = this.props;
 
