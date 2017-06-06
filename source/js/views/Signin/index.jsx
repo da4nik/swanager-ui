@@ -33,8 +33,8 @@ class Signin extends Component {
     redirectPath: PropTypes.string,
     router: PropTypes.object,
     authErrors: PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
+      PropTypes.string,
+      PropTypes.object,
     ]),
   }
 
