@@ -10,9 +10,11 @@ $header-margin: 20px;
   margin: 10px 0 20px 0;
 
   &__title {
+    width: 50%;
+    word-wrap: break-word;
     color: #777;
     font-size: large;
-    font-variant: bold;
+    font-weight: bold;
     position: absolute;
     top: 5px; left: 5px;
     line-height: $header-height;
@@ -53,6 +55,12 @@ $header-margin: 20px;
 
   &__description {
     margin-bottom: 5px;
+
+    &__value {
+      word-wrap: break-word;
+      border-bottom: 1px solid #000;
+      padding: 5px 0;
+    }
   }
 
   &__detail_value {
