@@ -53,12 +53,17 @@ $header-margin: 20px;
 
   &__description {
     margin-bottom: 5px;
+
+    &__value {
+      word-wrap: break-word;
+    }
   }
 
   &__detail_value {
     font-size: small;
     color: #AAA;
     margin-bottom: 5px;
+    word-wrap: break-word;
   }
 
   &__details_trigger {

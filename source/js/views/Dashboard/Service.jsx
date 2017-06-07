@@ -96,10 +96,10 @@ class Service extends Component {
     return (
       <div>
         <ul className='service__description'>
-          <li>URL for links: { service.ns_name }</li>
-          <li>Image: { service.image }</li>
-          { service.command.length > 0 ? <li>Command: { service.command }</li> : null }
-          <li>Replicas: { service.replicas }</li>
+          <li className='service__description__value'>URL for links: { service.ns_name }</li>
+          <li className='service__description__value'>Image: { service.image }</li>
+          { service.command.length > 0 ? <li className='service__description__value'>Command: { service.command }</li> : null }
+          <li className='service__description__value'>Replicas: { service.replicas }</li>
           {detailed ? (
             <div className='service__details'>
               <li>Variables: { variables }</li>
