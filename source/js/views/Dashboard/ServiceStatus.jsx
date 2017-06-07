@@ -27,7 +27,7 @@ const ServiceStatus = ({ status }) => {
 
   return (
     <div className={ htmlClass }>
-      <p>{ status.status } { statusTime } { timing }</p>
+      <p className='service_status__report'>{ status.status } { statusTime } { timing }</p>
       { error }
     </div>
   );
