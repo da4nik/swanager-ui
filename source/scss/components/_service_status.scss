@@ -3,10 +3,11 @@
   &__title {
     text-transform: uppercase;
     color: DarkBlue;
+    margin-bottom: 5px;
   }
 
   &__task {
-    border: 1px solid #888;
+    border: 1px solid #aaa;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
@@ -16,7 +17,14 @@
     color: #600;
   }
 
+  &__report {
+    font-size: small;
+    margin:0;
+  }
+
   &__error {
+    font-size: small;
+    margin:0;
     color: #AAA;
   }
 }
