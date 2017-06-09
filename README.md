@@ -23,17 +23,5 @@ $ ./build
 $ docker run --name swanager-ui -p <host_port>:80 -d swanager-ui:latest
 ```
 ## Env
-
-1. Create a file env.json
-2. Add an object with the necessary environment variables to a single object "myenv"
-
-Example: 
-
-{
-  "myenv": {
-    "SWANAGER_API_URL": "API_URL",
-    "SWANAGER_WS_URL": "WS_URL"
-  }
-}
-
-Using a variable: process.env.myenv.SWANAGER_API_URL
+export SWANAGER_API_URL=API_URL
+export SWANAGER_WS_URL=WS_URL

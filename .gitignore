@@ -6,4 +6,3 @@ build
 _nogit
 .idea/
 *.swp
-env.json

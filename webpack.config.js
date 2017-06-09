@@ -5,10 +5,11 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const Dotenv = require('./env.json');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
+const swanagerApi = process.env.SWANAGER_API_URL;
+const swanagerWs = process.env.SWANAGER_WS_URL;
 
 const jsSourcePath = path.join(__dirname, './source/js');
 const buildPath = path.join(__dirname, './build');
@@ -25,7 +26,8 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(nodeEnv),
-      myenv: JSON.stringify(Dotenv.myenv),
+      SWANAGER_API_URL: JSON.stringify(swanagerApi),
+      SWANAGER_WS_URL: JSON.stringify(swanagerWs),
     },
   }),
   new webpack.NamedModulesPlugin(),
