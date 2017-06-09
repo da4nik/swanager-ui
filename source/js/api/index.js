@@ -1,6 +1,7 @@
 import config from 'config';
 import { store } from '../index';
 
+console.log(process.env);
 const apiURL = config.apiURL;
 const wsURL = config.wsURL;
 
