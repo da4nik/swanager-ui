@@ -23,7 +23,6 @@ $header-margin: 20px;
     top: 5px; right: 5px;
   }
 
-
   &__button {
     background-color: transparent;
     border: 0;
@@ -49,6 +48,10 @@ $header-margin: 20px;
     &_left-spaced {
       margin-left: 15px;
     }
+  }
+
+  &__header-button {
+    font-size: small;
   }
 
   &__description {

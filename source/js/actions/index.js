@@ -7,6 +7,7 @@ export const APP_DELETED = 'APP_DELETED';
 export const SERVICES_LOADED = 'SERVICES_LOADED';
 export const SERVICE_LOADED = 'SERVICE_LOADED';
 export const SERVICE_REMOVED = 'SERVICE_REMOVED';
+export const SERVICE_LOGS = 'SERVICE_LOGS';
 
 // Signin
 export const SIGNED_IN = 'SIGNED_IN';

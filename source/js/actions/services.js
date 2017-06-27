@@ -1,14 +1,20 @@
 import API from '../api';
-import { SERVICES_LOADED, SERVICE_LOADED, SERVICE_REMOVED } from './index';
+import { SERVICES_LOADED, SERVICE_LOADED, SERVICE_REMOVED, SERVICE_LOGS } from './index';
 import { signout } from './signin';
 import { addAutohidedNotification } from './notifications';
 
 export const serviceLoaded = (loadedService) => ({ type: SERVICE_LOADED, data: loadedService });
 // removeService - drops service from store
 export const removeService = (removedService) => ({ type: SERVICE_REMOVED, data: removedService });
+
 export const servicesLoaded = (loadedServices) => ({
   type: SERVICES_LOADED,
   data: loadedServices,
+});
+
+export const serviceLogs = (service, logs) => ({
+  type: SERVICE_LOGS,
+  data: { service, logs },
 });
 
 export const loadServices = () => {
@@ -106,5 +112,31 @@ export const applyServiceAction = (service, action) => {
     .catch(response => {
       console.log('[applyServiceAction] Something went wrong.', response);
     });
+  };
+};
+
+export const loadLogs = (service) => {
+  let responseStatus;
+  return dispatch => {
+    API.serviceLogs(service)
+      .then(response => {
+        responseStatus = response.status;
+        return response.json();
+      })
+      .then(payload => {
+        switch (responseStatus) {
+          case 200:
+            dispatch(serviceLogs(service, payload.logs));
+            break;
+          case 401:
+            dispatch(signout());
+            break;
+          default:
+            console.log('Something went wrong.');
+        }
+      })
+      .catch(response => {
+        console.log('[loadLogs] Something went wrong. ', response);
+      });
   };
 };
