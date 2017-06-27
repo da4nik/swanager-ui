@@ -160,6 +160,11 @@ const serviceAction = (service, action) => {
   });
 };
 
+const serviceLogs = (service) => {
+  const url = `${ apiURL }/services/${ service.id }/logs`;
+  return fetch(url, { headers: headers() });
+};
+
 // ################# Exports
 
 export default {
@@ -173,6 +178,7 @@ export default {
   removeService,
   serviceAction,
   serviceActions,
+  serviceLogs,
   applicationAction,
   destroyApplication,
   saveApplication,

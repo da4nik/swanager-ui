@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import ServiceForm from './ServiceForm';
 import ServiceStatus from './ServiceStatus';
+import ServiceLogs from './ServiceLogs';
 import { deleteService, applyServiceAction } from '../../actions/services';
 import API from '../../api';
 
@@ -26,6 +27,7 @@ class Service extends Component {
     this.state = {
       editing: false,
       detailed: false,
+      showingLogs: false,
     };
   }
 
@@ -40,6 +42,11 @@ class Service extends Component {
 
   closeForm() {
     this.setState({ editing: false });
+  }
+
+  toggleLogs() {
+    const { showingLogs } = this.state;
+    this.setState({ showingLogs: !showingLogs });
   }
 
   renderForm() {
@@ -77,18 +84,18 @@ class Service extends Component {
     if (detailed) {
       variables = service.env.length > 0 ?
         service.env.map((variable) => {
-          return (<p className='service__detail_value'>{ variable.name } = { variable.value }</p>);
+          return (<p key={ variable.name } className='service__detail_value'>{ variable.name } = { variable.value }</p>);
         }) : (<p className='service__detail_value'>None</p>);
 
       ports = service.published_ports.length > 0 ?
         service.published_ports.map((port) => {
-          return (<p className='service__detail_value'>[{ port.protocol }] { port.internal } {' => '} { port.external } { ', disabled: '} { port.disabled ? 'true' : 'false' }</p>);
+          return (<p key={ port.external } className='service__detail_value'>[{ port.protocol }] { port.internal } {' => '} { port.external } { ', disabled: '} { port.disabled ? 'true' : 'false' }</p>);
         }) : (<p className='service__detail_value'>None</p>);
 
       volumes = service.volumes.length > 0 ?
         service.volumes.map((volume) => {
           return (
-            <p className='service__detail_value'>{ volume.service }{ `-> ${ volume.backend }` }</p>
+            <p key={ volume.service } className='service__detail_value'>{ volume.service }{ `-> ${ volume.backend }` }</p>
           );
         }) : (<p className='service__detail_value'>None</p>);
     }
@@ -120,9 +127,16 @@ class Service extends Component {
 
   render() {
     const { service, applyAction } = this.props;
+    const { showingLogs } = this.state;
     return (
       <section className='service'>
-        <div className='service__title'>{ service.name }</div>
+        <div className='service__title'>
+          { service.name }
+          <button
+            className='service__button service__header-button'
+            onClick={ () => { this.toggleLogs(); } }
+          >logs</button>
+        </div>
         <div className='service__buttons'>
           <button
             className='service__button'
@@ -141,6 +155,7 @@ class Service extends Component {
             onClick={ () => { if (confirm('Are you sure?')) { this.onRemove(); } } }
           >Remove</button>
         </div>
+        { showingLogs ? <ServiceLogs service={ service } /> : null }
         { this.renderForm() }
         { this.renderDescription() }
         <div className='service_status'>
