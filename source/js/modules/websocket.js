@@ -10,12 +10,14 @@ const startWebsocket = () => {
 
   socket.onmessage = (messageEvent) => {
     const message = JSON.parse(messageEvent.data);
-    if (message.service) {
-      store.dispatch(serviceLoaded(message.service));
-    }
-
-    if (message.data) {
-      store.dispatch(addAutohidedNotification('WS', message.data));
+    if (message.type === 'data') {
+      if (message.data.service) {
+        const service = message.data.service;
+        store.dispatch(serviceLoaded(service));
+        store.dispatch(
+          addAutohidedNotification('WS', `Got service ${ service.ns_name } state update.`)
+        );
+      }
     }
   };
 
