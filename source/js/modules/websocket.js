@@ -5,8 +5,15 @@ import API from '../api';
 
 const reconnectPeriod = 3000;
 
+// const readyStateConnecting = 0;
+const readyStateOpen = 1;
+// const readyStateClosing = 2;
+// const readyStateClosed = 3;
+
+let socket;
+
 const startWebsocket = () => {
-  const socket = new WebSocket(API.wsURL);
+  socket = new WebSocket(API.wsURL);
 
   socket.onmessage = (messageEvent) => {
     const message = JSON.parse(messageEvent.data);
@@ -40,6 +47,15 @@ const startWebsocket = () => {
   // socket.onerror = (event) => { };
 };
 
+const send = (message) => {
+  if (socket && socket.readyState && socket.readyState === readyStateOpen) {
+    socket.send(JSON.stringify(message));
+  }
+};
+
+window.send = send;
+
 export default {
   startWebsocket,
+  send,
 };
