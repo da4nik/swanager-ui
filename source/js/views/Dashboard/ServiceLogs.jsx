@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const mapStoreToProps = ({ logs }, { service }) => ({
@@ -6,7 +7,7 @@ const mapStoreToProps = ({ logs }, { service }) => ({
 });
 
 @connect(mapStoreToProps)
-class ServiceLogs extends React.Component {
+class ServiceLogs extends Component {
   static propTypes = {
     logs: PropTypes.array,
   }
