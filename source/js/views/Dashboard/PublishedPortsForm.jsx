@@ -13,14 +13,9 @@ class PublishedPortsForm extends Component {
 
   constructor(props) {
     super(props);
-    const ports = {};
+    let ports = {};
 
-    ports[guidGenerator()] = {
-      internal: 0,
-      external: 0,
-      protocol: 'tcp',
-      disabled: false,
-    };
+    ports = this.addEmptyPort(ports);
 
     if (props.ports && props.ports.length > 0) {
       props.ports.forEach((port) => {
@@ -59,6 +54,22 @@ class PublishedPortsForm extends Component {
 
   varsToJSObject(ports) {
     return Object.values(ports).map((port) => port);
+  }
+
+  addEmptyPort(ports) {
+    const newPorts = ports;
+    newPorts[guidGenerator()] = {
+      internal: 0,
+      external: 0,
+      protocol: 'tcp',
+      disabled: false,
+    };
+    return newPorts;
+  }
+
+  addNew() {
+    const { ports } = this.state;
+    this.setState({ ports: this.addEmptyPort(ports) });
   }
 
   renderPorts() {
@@ -107,6 +118,7 @@ class PublishedPortsForm extends Component {
     return (
       <div className={ PublishedPortsForm.blockClass }>
         { 'Published ports' }
+        <button onClick={ () => { this.addNew(); } }>Add</button>
         { this.renderPorts() }
       </div>
     );
