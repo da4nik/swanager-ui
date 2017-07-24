@@ -113,7 +113,7 @@ const serviceActions = {
 const services = () => {
   const params = {
     with_statuses: 1,
-    with_volume_sizes: 1,
+    // with_volume_sizes: 1,
   };
 
   const paramsString = Object.keys(params).map((key) => {

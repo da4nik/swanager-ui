@@ -6,6 +6,7 @@ import { saveService } from '../../actions/services';
 import EnvVarsForm from './EnvVarsForm';
 import PublishedPortsForm from './PublishedPortsForm';
 import VolumesForm from './VolumesForm';
+import FrontendEndpointsForm from './FrontendEndpointsForm';
 
 const mapDispatchToProps = dispatch => ({
   saveServ: (service) => { dispatch(saveService(service)); },
@@ -27,12 +28,13 @@ class ServiceForm extends Component {
       ports: props.service.published_ports,
       volumes: props.service.volumes,
       serviceHasChanges: false,
+      frontends: props.service.frontend_endpoints,
     };
   }
 
   onSave() {
     const { service, app, saveServ, closeForm } = this.props;
-    const { vars, ports, volumes } = this.state;
+    const { vars, ports, volumes, frontends } = this.state;
     const updatedService = {
       application_id: service.application_id || app.id,
       name: this.nameInput.value,
@@ -41,6 +43,7 @@ class ServiceForm extends Component {
       replicas: parseInt(this.replicasInput.value, 10),
       env: vars,
       published_ports: ports,
+      frontend_endpoints: frontends,
       volumes,
     };
     saveServ(Object.assign({}, service, updatedService));
@@ -54,6 +57,11 @@ class ServiceForm extends Component {
 
   onPortsChanged(ports) {
     this.setState({ ports, serviceHasChanges: true });
+  }
+
+  onFrontendsChanged(frontends) {
+    console.log('Frontends: ', frontends);
+    this.setState({ frontends, serviceHasChanges: true });
   }
 
   onVolumesChanged(volumes) {
@@ -132,6 +140,12 @@ class ServiceForm extends Component {
         <VolumesForm
           volumes={ this.state.volumes }
           onVolumesChanged={ (volumes) => { this.onVolumesChanged(volumes); } }
+        />
+
+        <FrontendEndpointsForm
+          frontends={ this.state.frontends }
+          internalPortHint={ this.state.ports.map((port) => port.external) }
+          onFrontendsChanged={ (frontends) => { this.onFrontendsChanged(frontends); } }
         />
 
         <button className='service-form__submit' disabled={ !this.state.serviceHasChanges } onClick={ () => { this.onSave(); } }>Save</button>
