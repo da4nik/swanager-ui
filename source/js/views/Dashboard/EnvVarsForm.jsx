@@ -24,7 +24,18 @@ class EnvVarsForm extends Component {
         vars[guidGenerator()] = variable;
       });
     }
-    this.state = { vars };
+    this.state = {
+      vars,
+      variableCanUpdate: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ variableCanUpdate: true });
+  }
+
+  componentWillUnmount () {
+    this.setState({ variableCanUpdate: false });
   }
 
   onNameChange(event, key) {
@@ -73,10 +84,12 @@ class EnvVarsForm extends Component {
   }
 
   updateVariable(key, elem) {
-    const { vars } = this.state;
-    this.state.vars[key] = Object.assign(vars[key], elem);
-    this.props.onVarsChanged(this.varsToJSObject(this.state.vars));
-    this.setState({ vars: this.state.vars });
+    const { vars, variableCanUpdate } = this.state;
+    if (variableCanUpdate){
+      this.state.vars[key] = Object.assign(vars[key], elem);
+      this.props.onVarsChanged(this.varsToJSObject(this.state.vars));
+      this.setState({ vars: this.state.vars });
+    }
   }
 
   elemClass(element) {

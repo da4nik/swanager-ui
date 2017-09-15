@@ -22,10 +22,10 @@ class Hints extends Component {
   }
 
   onClickOutside(event) {
-    const { onCloseHints } = this.props;
+    const { showHints, onCloseHints } = this.props;
 
     event.stopPropagation();
-    if (event.target.className !== 'showHints__circle') { onCloseHints(); }
+    if (showHints && event.target.className !== 'showHints__circle') { onCloseHints(); }
 
     return false;
   }
